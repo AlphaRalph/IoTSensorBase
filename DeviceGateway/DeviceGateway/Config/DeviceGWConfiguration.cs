@@ -12,12 +12,14 @@ namespace DeviceGateway.Config
     public class DeviceGWConfiguration
     {
         public int sleepTime { get; set; }
+        public string DWGName { get; set; }
         public List<InboundChannelConfiguration> InboundChannelConfigurations { get; set; }
-        //public List<OutboundChannelConfiguration> OutboundChannelConfigurations { get; set; }
+        public List<OutboundChannelConfiguration> OutboundChannelConfigurations { get; set; }
 
         public DeviceGWConfiguration()
         {
-
+            InboundChannelConfigurations = new List<InboundChannelConfiguration>();
+            OutboundChannelConfigurations = new List<OutboundChannelConfiguration>();
         }
 
         public static void Serialize(string file, DeviceGWConfiguration c)
@@ -45,6 +47,8 @@ namespace DeviceGateway.Config
             {
                 Console.WriteLine("Konfiguration nicht gefunden - schreibe Standard");
                 config = new DeviceGWConfiguration();
+                config.InboundChannelConfigurations.Add(new InboundChannelConfiguration("DeviceGateway.InboundChannels.FileInboundChannel", "yasdasd"));
+                config.OutboundChannelConfigurations.Add(new OutboundChannelConfiguration("DeviceGateway.OutboundChannels.AwsOutboundChannel", "a2eowo00nh8hc6-ats.iot.eu-central-1.amazonaws.com"));
                 Serialize(file, config);
             }
 

@@ -10,7 +10,7 @@ namespace DeviceGateway.InboundChannels
 {
     public interface IInboundChannel
     {
-        List<string> getInboundData();
+        List<JObject> getInboundData();
         void updateDataToDone(object oToUpdate);
         void deleteData(object oToDelete );
         void doConnect(string ConnectionString);

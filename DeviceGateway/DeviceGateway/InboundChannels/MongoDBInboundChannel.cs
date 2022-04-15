@@ -14,7 +14,7 @@ using System.Runtime.Serialization;
 namespace DeviceGateway.InboundChannels
 {
     class MongoDBInboundChannel : IInboundChannel
-    {        
+    {
         IMongoDatabase db;
         public string connectionData { get; set; }
 
@@ -26,7 +26,7 @@ namespace DeviceGateway.InboundChannels
         {
             connectionData = connectionString;
             doConnect(connectionString);
-        }        
+        }
 
         /**
          * method needed to connect channel after creation by empty constructor
@@ -37,16 +37,17 @@ namespace DeviceGateway.InboundChannels
             var dbname = mongoUrl.DatabaseName;
             db = new MongoClient(mongoUrl).GetDatabase(dbname);
         }
-    
-        public List<string> getInboundData()
+
+        public List<JObject> getInboundData()
         {
             var allDoc = db.GetCollection<BsonDocument>("Values");
-            var documents = allDoc.Find(new BsonDocument()).ToList();
-            List<string> lResults = new List<string>();
+            var filter = Builders<BsonDocument>.Filter.Eq("Status", 1);
+            var documents = allDoc.Find(filter).Project("{_id: 0}").ToList();
+            List<JObject> lResults = new List<JObject>();
             foreach (BsonDocument doc in documents)
             {
-                Console.WriteLine(doc.ToJson() );
-                lResults.Add(doc.ToJson()) ;
+                Console.WriteLine(doc.ToJson());
+                lResults.Add(JObject.Parse(doc.ToJson()));
             }
             return lResults;
         }
