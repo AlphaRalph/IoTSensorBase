@@ -68,6 +68,9 @@
     <Reference Include="K4os.Hash.xxHash, Version=1.0.6.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
       <HintPath>..\packages\K4os.Hash.xxHash.1.0.6\lib\net46\K4os.Hash.xxHash.dll</HintPath>
     </Reference>
+    <Reference Include="M2Mqtt.Net, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\M2Mqtt.4.3.0.0\lib\net45\M2Mqtt.Net.dll</HintPath>
+    </Reference>
     <Reference Include="MongoDB.Bson, Version=2.15.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MongoDB.Bson.2.15.0\lib\netstandard2.0\MongoDB.Bson.dll</HintPath>
     </Reference>
@@ -130,6 +133,9 @@
     <Compile Include="Config\DeviceGWConfiguration.cs" />
     <Compile Include="Config\OutboundChannelConfiguration.cs" />
     <Compile Include="Config\InboundChannelConfiguration.cs" />
+    <Compile Include="InboundChannels\FileInboundChannel.cs" />
+    <Compile Include="OutboundChannels\AwsOutboundChannel.cs" />
+    <Compile Include="OutboundChannels\IOutboundChannel.cs" />
     <Compile Include="InboundChannels\IInboundChannel.cs" />
     <Compile Include="InboundChannels\MongoDBInboundChannel.cs" />
     <Compile Include="Program.cs" />
@@ -146,7 +152,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="OutboundChannels\" />
+    <Folder Include="InboundChannels\TestFile\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Core\Compression\Snappy\lib\win\snappy32.dll" />

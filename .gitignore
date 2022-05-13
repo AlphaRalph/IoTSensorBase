@@ -348,3 +348,6 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/DeviceGateway/DeviceGateway/certificate.public.key
+/DeviceGateway/DeviceGateway/certificate.private.key
+/DeviceGateway/DeviceGateway/AmazonRootCA1.crt
