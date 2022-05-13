@@ -30,10 +30,7 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
+      <a href="#about-the-project">About The Project</a>      
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
@@ -45,7 +42,6 @@
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -70,6 +66,20 @@ Fields of activity:
 * Communication ( WIFI,LTE,etc...)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
+
+### Prerequisites
+
+MongoDB 5.0 under Raspberry Pi OS (64-bit) [https://andyfelong.com/2021/08/mongodb-4-4-under-raspberry-pi-os-64-bit-raspbian64/]
+
+
+### Installation
+
+How to install IOTSensorBase and get KEY for AWS-Cloude
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
