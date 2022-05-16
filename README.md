@@ -101,6 +101,18 @@ How to install IOTSensorBase and get KEY for AWS-Cloude
 
 ### How to read data from sensor
 
+In the first discussion a decision should be made on how the sensors should be implemented.
+The choice was between an implementation directly in the C# gateway or as a microservice outside of the gateway programming.
+
+* Using a C# implementation inside the gateway solution could make the storage of measured values in a Mongo-database redundant.
+* Implementing a micro-service for each sensor would make the solutuion more flexible.
+  Micro services can be implemented in any programming language.
+  They only have to store measured values to the database between sensor and gateway.
+
+We have decided to implement the sensors as a microService.
+We defined to program the microservices in Python as one team member has experience with this programming language.
+
+
 ### How to transfert data from sensor to gateway
 
 For the purpose of data security, measured values must be persistently buffered.
@@ -115,11 +127,10 @@ However, it is an SQL database, which does not bring any advantage with the simp
 We do not need any relations between sets of data.
 For this reason, we went looking for a NO-SQL database.
 In combination with Raspberry-Pi we decided to use a MONGO-DB.
-Only in the course of the project did we become aware of some difficulties.
+While using MONGO-DB we got aware of some difficuties.
 * Old Mongo DBs no longer work with the current C# drivers.
 * new Mongo DBs cannot be easily installed on the latest Raspberry OS versions
-
-Translated with www.DeepL.com/Translator (free version)
+* retrieving data from Mongo-DB does not work with standard Selects.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
