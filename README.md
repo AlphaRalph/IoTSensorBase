@@ -12,7 +12,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/AlphaRalph/IoTSensorBase">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="images/screenshot_1.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">IOT Sensor Base</h3>
@@ -121,4 +121,4 @@ How to install IOTSensorBase and get KEY for AWS-Cloude
 [license-url]: https://github.com/alphaRalph/IoTSensorBase/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/alphaRalph
-[product-screenshot]: images/screenshot_1.jpg
+[product-screenshot]: images/screenshot_1.png
