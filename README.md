@@ -40,7 +40,7 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
+    <li><a href="#discussion">Discussion</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -96,8 +96,30 @@ How to install IOTSensorBase and get KEY for AWS-Cloude
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-<!-- Usage -->
-## Usage
+<!-- discussion -->
+## Discussion
+
+### How to read data from sensor
+
+### How to transfert data from sensor to gateway
+
+For the purpose of data security, measured values must be persistently buffered.
+This works easiest in a lean database.
+At the beginning of the discussion, we wanted to use MariaDB.
+It can be used with simple SQL statements. 
+Advantages of this database are 
+* Easy installation on Raspberry
+* Easy to use in C# code as there are many well-documented application examples.
+
+However, it is an SQL database, which does not bring any advantage with the simplicity of our data.
+We do not need any relations between sets of data.
+For this reason, we went looking for a NO-SQL database.
+In combination with Raspberry-Pi we decided to use a MONGO-DB.
+Only in the course of the project did we become aware of some difficulties.
+* Old Mongo DBs no longer work with the current C# drivers.
+* new Mongo DBs cannot be easily installed on the latest Raspberry OS versions
+
+Translated with www.DeepL.com/Translator (free version)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
