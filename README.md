@@ -104,16 +104,15 @@ How to install IOTSensorBase and get KEY for AWS-Cloude
 In the first discussion a decision should be made on how the sensors should be implemented.
 The choice was between an implementation directly in the C# gateway or as a microservice outside of the gateway programming.
 
-* Using a C# implementation inside the gateway solution could make the storage of measured values in a Mongo-database redundant.
+* Using a C# implementation inside the gateway solution should avoid persiting measured values on Raspberry-Pi.
 * Implementing a micro-service for each sensor would make the solutuion more flexible.
   Micro services can be implemented in any programming language.
-  They only have to store measured values to the database between sensor and gateway.
 
 We have decided to implement the sensors as a microService.
 We defined to program the microservices in Python as one team member has experience with this programming language.
 
 
-### How to transfert data from sensor to gateway
+### How to transfer data from MicroService to Cloud - Step 1
 
 For the purpose of data security, measured values must be persistently buffered.
 This works easiest in a lean database.
@@ -130,7 +129,25 @@ In combination with Raspberry-Pi we decided to use a MONGO-DB.
 While using MONGO-DB we got aware of some difficuties.
 * Old Mongo DBs no longer work with the current C# drivers.
 * new Mongo DBs cannot be easily installed on the latest Raspberry OS versions
-* retrieving data from Mongo-DB does not work with standard Selects.
+* retrieving data from Mongo-DB does not work with the well known syntax of SQL-Selects.
+
+### How to transfer data from MicroService to Cloud - Step 2
+
+A gateway has to be implemented to establish the connection between sensor implementation and the cloud.
+In order to remain as flexible as possible in the future several inbound and outbound channels should be parameterisable.
+
+An Inbound-channel has to be able to do the following:
+* connect to a datasource
+* read values from datasource
+* deliver data to a gateway
+* mark data as processed when the gateway has completed the process
+
+An Outbound-channel has to be able to do the following:
+* connect to a cloud-service
+* send data
+* inform gateway about process-state
+
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
