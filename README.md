@@ -51,6 +51,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+[![IoT SensorBase][product-screenshot]]
+
 The aim is to develop a sensor platform, which is independent of the measured variables, records data and sends it to a cloud service.
 In cloud-services this data is analysed and visualised.
 
@@ -75,7 +77,7 @@ Fields of activity:
 
 Since a Raspberry was already provided by the FH-Wels, there was no need to look for an alternative here.
 
-The selection of sensors and LTE modul was done by Andre Pervan
+The selection of sensors and LTE modul was done by Andrej Pervan
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -83,12 +85,26 @@ The selection of sensors and LTE modul was done by Andre Pervan
 
 MongoDB 5.0 under Raspberry Pi OS (64-bit) [https://andyfelong.com/2021/08/mongodb-4-4-under-raspberry-pi-os-64-bit-raspbian64/]
 
+To run the C# .NET Code built on Visual Studio 2017 we used MONO:
+   ```sh
+   sudo apt install mono-complete
+   ```
+
 ### Installation
 
 How to install IOTSensorBase and get KEY for AWS-Cloude
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+<!-- Usage -->
+## Usage
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- Roadmap -->
+## Roadmap
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
@@ -105,4 +121,4 @@ How to install IOTSensorBase and get KEY for AWS-Cloude
 [license-url]: https://github.com/alphaRalph/IoTSensorBase/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/alphaRalph
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: images/screenshot_1.jpg
