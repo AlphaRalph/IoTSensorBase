@@ -35,7 +35,7 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-	  <li><a href="#HardwareSelection">Selection of suitable hardware</a></li>
+	    <li><a href="#HardwareSelection">Selection of suitable hardware</a></li>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
@@ -71,7 +71,7 @@ Fields of activity:
 <!-- Getting Started -->
 ## Getting Started
 
-### Selection of suitable hardware
+### HardwareSelection
 
 Since a Raspberry was already provided by the FH-Wels, there was no need to look for an alternative here.
 
