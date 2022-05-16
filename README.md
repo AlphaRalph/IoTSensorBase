@@ -35,6 +35,7 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
+	  <li><a href="#HardwareSelection">Selection of suitable hardware</a></li>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
@@ -67,17 +68,26 @@ Fields of activity:
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+<!-- Getting Started -->
+## Getting Started
+
+### Selection of suitable hardware
+
+Since a Raspberry was already provided by the FH-Wels, there was no need to look for an alternative here.
+
+The selection of sensors and LTE modul was done by Andre Pervan
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 ### Prerequisites
 
 MongoDB 5.0 under Raspberry Pi OS (64-bit) [https://andyfelong.com/2021/08/mongodb-4-4-under-raspberry-pi-os-64-bit-raspbian64/]
-
 
 ### Installation
 
 How to install IOTSensorBase and get KEY for AWS-Cloude
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 
