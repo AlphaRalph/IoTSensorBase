@@ -83,7 +83,8 @@ The selection of sensors and LTE modul was done by Andrej Pervan
 
 ### Prerequisites
 
-MongoDB 5.0 under Raspberry Pi OS (64-bit) [https://andyfelong.com/2021/08/mongodb-4-4-under-raspberry-pi-os-64-bit-raspbian64/]
+MongoDB 5.0 under Raspberry Pi OS (64-bit) 
+[https://andyfelong.com/2021/08/mongodb-4-4-under-raspberry-pi-os-64-bit-raspbian64/]
 
 To run the C# .NET Code built on Visual Studio 2017 we used MONO:
    ```sh
@@ -104,7 +105,7 @@ How to install IOTSensorBase and get KEY for AWS-Cloud
 In the first discussion a decision should be made on how the sensors should be implemented.
 The choice was between an implementation directly in the C# gateway or as a microservice outside of the gateway programming.
 
-* Using a C# implementation inside the gateway solution should avoid persiting measured values on Raspberry-Pi.
+* Using a C# implementation inside the gateway solution should avoid persistence of measured values on Raspberry-Pi.
 * Implementing a micro-service for each sensor would make the solutuion more flexible.
   Micro services can be implemented in any programming language.
 
@@ -155,36 +156,89 @@ An Outbound-channel has to be able to do the following:
 ## Roadmap
 
 In our project we identified four main topics:
+
 * reading data from various sensors and write data to database
+- [x] implement template for micro service 
+	- [x] write data to MongoDB at localhost
+	- [x] acquire temperature from sensor
+	- [x] acquire CO2 level from sensor
+- [x] autostart micro services at startup
+- [] 
+
 * establish a connection to cloud and send data in correct format
+- [x] implement a DeviceGateway to connect to source DB and MQTT-Broker
+- [] handle KEY Files for authentification and authorisation
+	- [x] creation of KEY Files is done manually
+	- [] fully authomated handling of new devices
+- [x] retriev data from the source DB cyclically
+- [x] forward data to configured outbound channel
+- [x] IoT-topic can be configured ( could be a serial number )
+- [x] outbound channes sends all data one by one 
+	- [] outbound channel can be configured to send all data in a bulk
+	- [] outbound channel can be configured to compress data
+- [x] multiple channes are configurable
+- [x] inbound data is sent to all outbound channels
+- [x] after exception connections are restored
+
 * store received data in cloud database
+- [] how to handle message from MQTT broker
+- [] which database should be used
+- [] how to store in Database
+
 * visualize data
+- [] what tool can be used for visualisation
+- [] what database can be used as source for visualisation
+- [] how to realise dashboards
+
+
 
 ### Data acquisition
 
 To make the solution expandable microservices are used to acquire data from sensor.
 Every sensor has its own microservice.
-There are two tasks for this micro-services:
-	* to acquire data from sensor
-	* write data into database
+There are two tasks for these micro-services:
+* to acquire data from sensor
+* write data into database
 
-There are no restrictions about programming language for there services.
-@Andrej - please insert some more details.
+There are no restrictions about programming language for these services.
+@andrejpervan - please insert some more details.
 
 ### Data transportation
 
 The transportation of data from source to destination is handled by a C# program called DeviceGateway.
+This DeviceGateway has to coordinate InboundChannels and OutboundChannels defined in a config.xml.
+In case there is no config.xml when DeviceGateway starts the first time, a dummy config.xml will be created.
+This should be a starting point for your own configuration.
+
+Here we have a schema of Device Gateway:
 ![schema DeviceGateway][dwg-image]
+
+Devicegateway needs at least one inbound and one outbound channel to run.
+At config.xml this could look like this:
+![example configuration][config-image]
+
+The first version includes an inbound channel for MONGO-DB,
+and one outbound channel for AWS-Cloud
+
+#### read data from MONGO inbound-channel
+
+Be aware of the following topics:
+* The configuration contains the connection-string to connect to.
+* The connection-string is case sensitiv!
+* This database must contain a Collection 'Values'! ( case sensitiv again )
+  In the first version, this collectionname is hard coded.
+* 
+
 
 ### Data storage in cloud
 
-Data received by MQTT have to be stored at database.
-@Thomas Please insert the result of your research here.
+Various measurement data received via MQTT must be stored in a database.
+@BergmairThomas Please insert the result of your research here.
 
 ### Data processing
 
 Measurment data has to be visualized.
-@Hatidza Please insert the result of your research here.
+@Hatidza0612 Please insert the result of your research here.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -205,3 +259,4 @@ Measurment data has to be visualized.
 [linkedin-url]: https://linkedin.com/in/alphaRalph
 [product-screenshot]: images/screenshot_1.png
 [dwg-image]:images/DWG.png
+[config-image]:images/config.png
