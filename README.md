@@ -42,7 +42,7 @@
     </li>
     <li><a href="#discussion">Discussion</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
+
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -51,7 +51,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![IoT SensorBase][product-screenshot]]
+![IoT SensorBase][product-screenshot]
 
 The aim is to develop a sensor platform, which is independent of the measured variables, records data and sends it to a cloud service.
 In cloud-services this data is analysed and visualised.
@@ -92,7 +92,7 @@ To run the C# .NET Code built on Visual Studio 2017 we used MONO:
 
 ### Installation
 
-How to install IOTSensorBase and get KEY for AWS-Cloude
+How to install IOTSensorBase and get KEY for AWS-Cloud
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -154,6 +154,38 @@ An Outbound-channel has to be able to do the following:
 <!-- Roadmap -->
 ## Roadmap
 
+In our project we identified four main topics:
+* reading data from various sensors and write data to database
+* establish a connection to cloud and send data in correct format
+* store received data in cloud database
+* visualize data
+
+### Data acquisition
+
+To make the solution expandable microservices are used to acquire data from sensor.
+Every sensor has its own microservice.
+There are two tasks for this micro-services:
+	* to acquire data from sensor
+	* write data into database
+
+There are no restrictions about programming language for there services.
+@Andrej - please insert some more details.
+
+### Data transportation
+
+The transportation of data from source to destination is handled by a C# program called DeviceGateway.
+![schema DeviceGateway][dwg-image]
+
+### Data storage in cloud
+
+Data received by MQTT have to be stored at database.
+@Thomas Please insert the result of your research here.
+
+### Data processing
+
+Measurment data has to be visualized.
+@Hatidza Please insert the result of your research here.
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
@@ -172,3 +204,4 @@ An Outbound-channel has to be able to do the following:
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/alphaRalph
 [product-screenshot]: images/screenshot_1.png
+[dwg-image]:images/DWG.jpg
