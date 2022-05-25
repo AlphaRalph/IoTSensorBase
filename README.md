@@ -204,4 +204,4 @@ Measurment data has to be visualized.
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/alphaRalph
 [product-screenshot]: images/screenshot_1.png
-[dwg-image]:images/DWG.jpg
+[dwg-image]:images/DWG.png
