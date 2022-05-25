@@ -42,7 +42,6 @@
     </li>
     <li><a href="#discussion">Discussion</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -157,40 +156,38 @@ An Outbound-channel has to be able to do the following:
 
 In our project we identified four main topics:
 
-* reading data from various sensors and write data to database
+* **reading data from various sensors and write data to database**
 - [x] implement template for micro service 
 	- [x] write data to MongoDB at localhost
 	- [x] acquire temperature from sensor
 	- [x] acquire CO2 level from sensor
 - [x] autostart micro services at startup
-- [] 
+- [ ] ...
 
-* establish a connection to cloud and send data in correct format
+* **establish a connection to cloud and send data in correct format**
 - [x] implement a DeviceGateway to connect to source DB and MQTT-Broker
-- [] handle KEY Files for authentification and authorisation
+- [ ] handle KEY Files for authentification and authorisation
 	- [x] creation of KEY Files is done manually
-	- [] fully authomated handling of new devices
+	- [ ] fully authomated handling of new devices
 - [x] retriev data from the source DB cyclically
 - [x] forward data to configured outbound channel
 - [x] IoT-topic can be configured ( could be a serial number )
 - [x] outbound channes sends all data one by one 
-	- [] outbound channel can be configured to send all data in a bulk
-	- [] outbound channel can be configured to compress data
+	- [ ] outbound channel can be configured to send all data in a bulk
+	- [ ] outbound channel can be configured to compress data
 - [x] multiple channes are configurable
 - [x] inbound data is sent to all outbound channels
 - [x] after exception connections are restored
 
-* store received data in cloud database
-- [] how to handle message from MQTT broker
-- [] which database should be used
-- [] how to store in Database
+* **store received data in cloud database**
+- [ ] how to handle message from MQTT broker
+- [ ] which database should be used
+- [ ] how to store in Database
 
-* visualize data
-- [] what tool can be used for visualisation
-- [] what database can be used as source for visualisation
-- [] how to realise dashboards
-
-
+* **visualize data**
+- [ ] what tool can be used for visualisation
+- [ ] what database can be used as source for visualisation
+- [ ] how to realise dashboards
 
 ### Data acquisition
 
