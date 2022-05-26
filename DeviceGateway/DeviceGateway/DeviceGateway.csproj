@@ -133,11 +133,13 @@
     <Compile Include="Config\DeviceGWConfiguration.cs" />
     <Compile Include="Config\OutboundChannelConfiguration.cs" />
     <Compile Include="Config\InboundChannelConfiguration.cs" />
+    <Compile Include="DeviceGateway.cs" />
     <Compile Include="InboundChannels\FileInboundChannel.cs" />
+    <Compile Include="InboundChannels\MongoDBInboundChannel.cs" />
     <Compile Include="OutboundChannels\AwsOutboundChannel.cs" />
     <Compile Include="OutboundChannels\IOutboundChannel.cs" />
     <Compile Include="InboundChannels\IInboundChannel.cs" />
-    <Compile Include="InboundChannels\MongoDBInboundChannel.cs" />
+    <Compile Include="OutboundChannels\SentDataEventArgs.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

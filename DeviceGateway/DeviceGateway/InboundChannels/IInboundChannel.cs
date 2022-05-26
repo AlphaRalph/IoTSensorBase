@@ -11,7 +11,7 @@ namespace DeviceGateway.InboundChannels
     public interface IInboundChannel
     {
         List<JObject> getInboundData();
-        void updateDataToDone(object oToUpdate);
+        void updateDataToDone(JObject oToUpdate);
         void deleteData(object oToDelete );
         void doConnect(string ConnectionString);
     }

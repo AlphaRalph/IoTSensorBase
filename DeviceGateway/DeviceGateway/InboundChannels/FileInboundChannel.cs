@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -26,11 +27,17 @@ namespace DeviceGateway.InboundChannels
         {
         }
     
-        public List<string> getInboundData()
+        public List<JObject> getInboundData()
         {            
             string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)+ "\\InboundChannels\\TestFile\\JSonTestData.txt";            
             string[] lines = File.ReadAllLines(path);
-            return new List<string>(lines) ;
+            List<JObject> lResults = new List<JObject>();
+            foreach (string oneLine in lines)
+            {
+                Console.WriteLine(oneLine);
+                lResults.Add(JObject.Parse(oneLine));
+            }
+            return lResults;
         }
 
         public void deleteData(object oToDelete)
@@ -38,7 +45,7 @@ namespace DeviceGateway.InboundChannels
             Console.WriteLine("not implemented now");
         }
 
-        public void updateDataToDone(object oToUpdate)
+        public void updateDataToDone(JObject oToUpdate)
         {
             Console.WriteLine("not implemented now");
         }

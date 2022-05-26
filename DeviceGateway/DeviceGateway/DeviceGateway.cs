@@ -1,0 +1,168 @@
+﻿using DeviceGateway.InboundChannels;
+using DeviceGateway.OutboundChannels;
+using DeviceGateway.Config;
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using Newtonsoft.Json.Linq;
+using System.ComponentModel;
+
+namespace DeviceGateway
+{
+
+    public class DeviceGateway
+    {
+        static List<IInboundChannel> inboundChannels = new List<IInboundChannel> { };
+        static List<IOutboundChannel> outboundChannels = new List<IOutboundChannel> { };
+        DeviceGWConfiguration config;
+
+        public DeviceGateway()
+        {
+            Console.WriteLine("starting Gateway...");
+            // read Config-File
+            config = DeviceGWConfiguration.Deserialize("config.xml");
+            runInitialize();
+        }
+
+        public void doSyncronisation()
+        {
+            /**
+             * only when there is minimum one inbound and one outbound channel
+             * we start the loop
+             */
+            while (inboundChannels.Count > 0 && outboundChannels.Count > 0)
+            {
+                /**
+                 * first version of Error Handling
+                 * after connection lost we should try to re-initialize
+                 */
+                try
+                {
+
+                    List<JObject> result = getInboundData();
+
+                    if ( result.Count > 0)
+                    {                    
+                        /**
+                         * add TOPIC to Json-String
+                         * Topic represents the Raspberry ( maybe a room )
+                         */                    
+                        addIotTopic(result);
+
+
+                        /**
+                         * send all data to ALL outbound channels
+                         */
+                        sendAllData(result);
+                    }
+                }
+                catch ( Exception e)
+                {
+                    Console.WriteLine("Error: {0}", e.ToString());
+                    runCleanup();
+                    runInitialize();
+                }
+
+                Console.WriteLine("waiting {0} seconds for next run", config.sleepTime);
+                Thread.Sleep(config.sleepTime * 1000);
+            }
+        }
+
+        private List<JObject> getInboundData()
+        {
+            Console.WriteLine("read data from inbound-Channel");
+            List<JObject> result = new List<JObject>();
+
+            /**
+             * collect inbound-data from various channels             
+             */
+            foreach (IInboundChannel inChannel in inboundChannels)
+            {
+                result.AddRange(inChannel.getInboundData());
+                foreach (JObject jo in result)
+                {
+                    Console.WriteLine("Data got from Database:" + jo);
+                }
+            }
+            return result;
+        }
+
+        private void addIotTopic( List<JObject> toSend )
+        {
+            foreach (JObject message in toSend)
+            {
+                message.Add("IOT-Topic", config.DWGName);
+            }
+        }
+
+        private bool sendAllData(List<JObject> toSend)
+        {
+            bool sendOk = false;
+            foreach (IOutboundChannel outChannel in outboundChannels)
+            {
+                sendOk = outChannel.sendData(toSend);
+                Console.WriteLine("sent all Data");
+            }
+            return sendOk;
+        }
+
+        private void runInitialize()
+        {
+            /**
+             * Create Inbound Channels defined in config-File
+             * connect channel after creation
+             */
+            #region handleInboundChannelConfig
+            foreach (InboundChannelConfiguration channelConf in config.InboundChannelConfigurations)
+            {
+                Console.WriteLine("adding new Channel:" + channelConf.ChannelName);
+                Console.WriteLine("Connectiondata    :" + channelConf.ConnectionString + "\n");
+                IInboundChannel newChannel = (IInboundChannel)Activator.CreateInstance(Type.GetType(channelConf.ChannelName));
+                newChannel.doConnect(channelConf.ConnectionString);
+                inboundChannels.Add(newChannel);
+            }
+            #endregion
+
+            /**
+             * Create Outbound Channels defined in config-File
+             * connect channel after creation
+             */
+            #region handleOutboundChannelConfig
+            foreach (OutboundChannelConfiguration channelConf in config.OutboundChannelConfigurations)
+            {
+                Console.WriteLine("adding new Channel:" + channelConf.ChannelName);
+                Console.WriteLine("Connectiondata    :" + channelConf.ConnectionString + "\n");
+                IOutboundChannel newChannel = (IOutboundChannel)Activator.CreateInstance(Type.GetType(channelConf.ChannelName));
+                try
+                {
+                    newChannel.sentDataEventHandler += updateReceivedData;
+                    newChannel.doConnect(channelConf.ConnectionString);
+                    outboundChannels.Add(newChannel);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("UIJE:" + e.Message);
+                    Console.ReadLine();
+                }
+
+            }
+            #endregion
+        }
+
+        private void runCleanup()
+        {
+            inboundChannels = new List<IInboundChannel> { };
+            outboundChannels = new List<IOutboundChannel> { };
+            Console.WriteLine("Cleanup done ...");
+        }
+
+        public static void updateReceivedData(object sender, EventArgs e)
+        {
+            Console.WriteLine("updateReceivedData" + ((SentDataEventArgs)e).SentData.GetValue("oriId") + " to done:" + ((SentDataEventArgs)e).IsSuccessful);
+            foreach (IInboundChannel inChannel in inboundChannels)
+            {
+                inChannel.updateDataToDone(((SentDataEventArgs)e).SentData);
+            }
+        }
+    }
+}
