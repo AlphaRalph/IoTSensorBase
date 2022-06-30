@@ -234,8 +234,17 @@ Various measurement data received via MQTT must be stored in a database.
 
 ### Data processing
 
-Measurment data has to be visualized.
-@Hatidza0612 Please insert the result of your research here.
+In order to visualize the measured data, which is located in the AWS DynamoDB, Grafana was used in this project, which has to be installed first. 
+
+[https://grafana.com/grafana/download/8.4.6?platform=windows]
+
+Grafana does not have an interface to read the data from the database, so an additional plugin is needed. 
+
+[https://github.com/TLV-PMOP/grafana-dynamodb-datasource]
+
+For querying the data primary key values are required: a partition key attribute and a sort key attribute.
+The sort key attribute is the timestamp (SensorTimestamp), the primary key value is the sensor name (SensorName). 
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
