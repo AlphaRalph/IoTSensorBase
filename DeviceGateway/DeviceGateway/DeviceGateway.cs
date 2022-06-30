@@ -6,31 +6,53 @@ using System.Collections.Generic;
 using System.Threading;
 using Newtonsoft.Json.Linq;
 using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace DeviceGateway
 {
 
     public class DeviceGateway
     {
-        static List<IInboundChannel> inboundChannels = new List<IInboundChannel> { };
-        static List<IOutboundChannel> outboundChannels = new List<IOutboundChannel> { };
-        DeviceGWConfiguration config;
+        private static List<IInboundChannel> _inboundChannels = new List<IInboundChannel> { };
+        private static List<IOutboundChannel> _outboundChannels = new List<IOutboundChannel> { };
+        private string _sDeviceGatewayName;
+        private int _iSleeptime;
+        //DeviceGWConfiguration config;
 
         public DeviceGateway()
         {
             Console.WriteLine("starting Gateway...");
             // read Config-File
-            config = DeviceGWConfiguration.Deserialize("config.xml");
-            runInitialize();
+            //config = DeviceGWConfiguration.Deserialize("config.xml");
         }
 
-        public void doSyncronisation()
+        public DeviceGateway ( List<IInboundChannel> inboundChannels, List<IOutboundChannel> outboundChannels , string sDeviceGatewayName, int iSleeptime)
+        {
+            _inboundChannels = inboundChannels;
+            _outboundChannels = outboundChannels;
+            _sDeviceGatewayName = sDeviceGatewayName;
+            _iSleeptime = iSleeptime;
+
+            foreach (IOutboundChannel outbound in outboundChannels)
+            {
+                outbound.sentDataEventHandler += updateReceivedData;
+            }
+        }
+
+
+        public Task Synchronize(CancellationToken token)
+        {
+            return Task.Run(()=>doSyncronisation(token, _iSleeptime), token);
+
+        }
+
+        private void doSyncronisation(CancellationToken token, int iSleeptime)
         {
             /**
              * only when there is minimum one inbound and one outbound channel
              * we start the loop
              */
-            while (inboundChannels.Count > 0 && outboundChannels.Count > 0)
+            while (!token.IsCancellationRequested && _inboundChannels.Count > 0 && _outboundChannels.Count > 0)
             {
                 /**
                  * first version of Error Handling
@@ -59,12 +81,18 @@ namespace DeviceGateway
                 catch ( Exception e)
                 {
                     Console.WriteLine("Error: {0}", e.ToString());
-                    runCleanup();
-                    runInitialize();
                 }
 
-                Console.WriteLine("waiting {0} seconds for next run", config.sleepTime);
-                Thread.Sleep(config.sleepTime * 1000);
+                Console.WriteLine("waiting {0} seconds for next run", iSleeptime);
+                //Thread.Sleep(config.sleepTime * 1000);
+                try
+                {
+                    Task.Delay(iSleeptime * 1000, token).Wait();
+                }
+                catch (AggregateException ex) //TaskCanceledException
+                {
+                    Console.WriteLine("abgebrochen");
+                }
             }
         }
 
@@ -76,7 +104,7 @@ namespace DeviceGateway
             /**
              * collect inbound-data from various channels             
              */
-            foreach (IInboundChannel inChannel in inboundChannels)
+            foreach (IInboundChannel inChannel in _inboundChannels)
             {
                 result.AddRange(inChannel.getInboundData());
                 foreach (JObject jo in result)
@@ -91,14 +119,14 @@ namespace DeviceGateway
         {
             foreach (JObject message in toSend)
             {
-                message.Add("IOT-Topic", config.DWGName);
+                message.Add("IOT-Topic", _sDeviceGatewayName );
             }
         }
 
         private bool sendAllData(List<JObject> toSend)
         {
             bool sendOk = false;
-            foreach (IOutboundChannel outChannel in outboundChannels)
+            foreach (IOutboundChannel outChannel in _outboundChannels)
             {
                 sendOk = outChannel.sendData(toSend);
                 Console.WriteLine("sent all Data");
@@ -106,60 +134,17 @@ namespace DeviceGateway
             return sendOk;
         }
 
-        private void runInitialize()
-        {
-            /**
-             * Create Inbound Channels defined in config-File
-             * connect channel after creation
-             */
-            #region handleInboundChannelConfig
-            foreach (InboundChannelConfiguration channelConf in config.InboundChannelConfigurations)
-            {
-                Console.WriteLine("adding new Channel:" + channelConf.ChannelName);
-                Console.WriteLine("Connectiondata    :" + channelConf.ConnectionString + "\n");
-                IInboundChannel newChannel = (IInboundChannel)Activator.CreateInstance(Type.GetType(channelConf.ChannelName));
-                newChannel.doConnect(channelConf.ConnectionString);
-                inboundChannels.Add(newChannel);
-            }
-            #endregion
-
-            /**
-             * Create Outbound Channels defined in config-File
-             * connect channel after creation
-             */
-            #region handleOutboundChannelConfig
-            foreach (OutboundChannelConfiguration channelConf in config.OutboundChannelConfigurations)
-            {
-                Console.WriteLine("adding new Channel:" + channelConf.ChannelName);
-                Console.WriteLine("Connectiondata    :" + channelConf.ConnectionString + "\n");
-                IOutboundChannel newChannel = (IOutboundChannel)Activator.CreateInstance(Type.GetType(channelConf.ChannelName));
-                try
-                {
-                    newChannel.sentDataEventHandler += updateReceivedData;
-                    newChannel.doConnect(channelConf.ConnectionString);
-                    outboundChannels.Add(newChannel);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("UIJE:" + e.Message);
-                    Console.ReadLine();
-                }
-
-            }
-            #endregion
-        }
-
         private void runCleanup()
         {
-            inboundChannels = new List<IInboundChannel> { };
-            outboundChannels = new List<IOutboundChannel> { };
+            _inboundChannels = new List<IInboundChannel> { };
+            _outboundChannels = new List<IOutboundChannel> { };
             Console.WriteLine("Cleanup done ...");
         }
 
         public static void updateReceivedData(object sender, EventArgs e)
         {
             Console.WriteLine("updateReceivedData" + ((SentDataEventArgs)e).SentData.GetValue("oriId") + " to done:" + ((SentDataEventArgs)e).IsSuccessful);
-            foreach (IInboundChannel inChannel in inboundChannels)
+            foreach (IInboundChannel inChannel in _inboundChannels)
             {
                 inChannel.updateDataToDone(((SentDataEventArgs)e).SentData);
             }

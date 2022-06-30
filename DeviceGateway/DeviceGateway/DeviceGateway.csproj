@@ -130,6 +130,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChannelProvider.cs" />
     <Compile Include="Config\DeviceGWConfiguration.cs" />
     <Compile Include="Config\OutboundChannelConfiguration.cs" />
     <Compile Include="Config\InboundChannelConfiguration.cs" />
