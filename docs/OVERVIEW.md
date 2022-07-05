@@ -11,11 +11,11 @@
       <ul>
 	    <li><a href="#HardwareSelection">Selection of suitable hardware</a></li>
         <li><a href="#Prerequisites">Prerequisites</a></li>
-		<li><a href="#Install Sensors"></a>Install Sensors</li>
-		<li><a href="#Communication between MicroServices with Sensors"></a>MicroServices</li>
-		<li><a href="#Setup MongoDB"></a>Setup MongoDB</li>
-		<li><a href="#Configuration of DeviceGateway"></a>Configuration of DeviceGateway</li>
-		<li><a href="#Configuration of AWS-cloud services"></a>Configuration of AWS-cloud services</li>
+		<li><a href="#Install Sensors">Install Sensors</a></li>
+		<li><a href="#Communication between MicroServices with Sensors">MicroServices</a></li>
+		<li><a href="#Setup MongoDB">Setup MongoDB</a></li>
+		<li><a href="#Configuration of DeviceGateway">Configuration of DeviceGateway</a></li>
+		<li><a href="#Configuration of AWS-cloud services">Configuration of AWS-cloud services</a></li>
       </ul>
     </li>
   </ol>
