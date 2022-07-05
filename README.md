@@ -72,7 +72,7 @@ Fields of activity:
 <!-- Getting Started -->
 ## Getting Started
 
-<a href="/alphaRalph/IoTSensorBase/docs/OVERVIEW.md">Getting Started Guide</a> includes a description of how to get the project run.
+<a href="docs/OVERVIEW.md">Getting Started Guide</a> includes a description of how to get the project run.
 
 ### HardwareSelection
 
