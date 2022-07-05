@@ -23,6 +23,11 @@
 
 ![Idea of Architecture][architecture]
 
+We shared the responsibility:
+* Data acquisition  ( written in Python )
+* DeviceGateway ( written in C# )
+* Data storage in cloud DB
+* Data visualisation
 
 ### How to read data from sensor
 
