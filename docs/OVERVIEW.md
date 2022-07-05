@@ -62,4 +62,4 @@ To read data from Mongo-Db and send to AWS-cloud the configuration could look li
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [Architecture]: images/IoT-SensorBase.png
-[config-image]: images/config.png
+[config-image]: images/config.PNG
