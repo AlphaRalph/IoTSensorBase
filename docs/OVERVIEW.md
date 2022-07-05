@@ -2,8 +2,27 @@
 
 <br />
 
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>    
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+	    <li><a href="#HardwareSelection">Selection of suitable hardware</a></li>
+        <li><a href="#Prerequisites">Prerequisites</a></li>
+		<li><a href="#Install Sensors"></a>Install Sensors</li>
+		<li><a href="#Communication between MicroServices with Sensors"></a>MicroServices</li>
+		<li><a href="#Setup MongoDB"></a>Setup MongoDB</li>
+		<li><a href="#Configuration of DeviceGateway"></a>Configuration of DeviceGateway</li>
+		<li><a href="#Configuration of AWS-cloud services">Configuration of AWS-cloud services
+      </ul>
+    </li>
+  </ol>
+</details>
 
-<!-- Getting Started, a walkthrough -->
+
+<!-- Getting Started Guide - Overview -->
 ## Getting Started Guide - Overview
 
 Getting started will walk you through the process to setup Sensors, a Devicegateway, IoT communication and Visualisation.
@@ -49,9 +68,9 @@ To run the C# .NET Code built on Visual Studio 2017 we used MONO:
 
 @Andrej: please tell about your experience about communication with sensors
 
-### Document in MongoDB
+### setup MongoDB
 
-### configuration of DeviceGateway
+### Configuration of DeviceGateway
 
 You will find a config.xml in your binaries folder.<br />
 
@@ -60,12 +79,14 @@ To read data from Mongo-Db and send to AWS-cloud the configuration could look li
 
 ![example configuration][config-image]
 
-In order to connect to MQTT-broker you need some certificates.
-@Bergmair Thomas: please add some information how to get these files.
+In order to connect to MQTT-broker you need some certificates.<br />
+@Thomas: please add some information how to get these files.
+
+@Andrej: could you add some information how to start the DeviceGateway.exe on raspberry.
 
 Once both connections are established DeviceGateway will start to transfer data.
 
-### configuration of AWS-cloud services
+### Configuration of AWS-cloud services
 @Cloud-Crew: please tell about your work
 
 
