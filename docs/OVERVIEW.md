@@ -15,7 +15,7 @@
 		<li><a href="#Communication between MicroServices with Sensors"></a>MicroServices</li>
 		<li><a href="#Setup MongoDB"></a>Setup MongoDB</li>
 		<li><a href="#Configuration of DeviceGateway"></a>Configuration of DeviceGateway</li>
-		<li><a href="#Configuration of AWS-cloud services">Configuration of AWS-cloud services
+		<li><a href="#Configuration of AWS-cloud services"></a>Configuration of AWS-cloud services</li>
       </ul>
     </li>
   </ol>
@@ -60,15 +60,15 @@ To run the C# .NET Code built on Visual Studio 2017 we used MONO:
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-### install the Sensors
+### Install Sensors
 
 @Andrej: please tell about your experience about installation of sensors
 
-### communication between MicroServices with Sensors
+### Communication between MicroServices with Sensors
 
 @Andrej: please tell about your experience about communication with sensors
 
-### setup MongoDB
+### Setup MongoDB
 
 ### Configuration of DeviceGateway
 
