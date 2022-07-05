@@ -72,6 +72,8 @@ Fields of activity:
 <!-- Getting Started -->
 ## Getting Started
 
+<a href="/alphaRalph/IoTSensorBase/docs/OVERVIEW.md">Getting Started Guide</a> includes a description of how to get the project run.
+
 ### HardwareSelection
 
 Since a Raspberry was already provided by the FH-Wels, there was no need to look for an alternative here.
@@ -265,4 +267,4 @@ The sort key attribute is the timestamp (SensorTimestamp), the primary key value
 [linkedin-url]: https://linkedin.com/in/alphaRalph
 [product-screenshot]: images/screenshot_1.png
 [dwg-image]:images/DWG.png
-[config-image]:images/config.png
+[config-image]:images/config.PNG
