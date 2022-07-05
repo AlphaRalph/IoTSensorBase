@@ -57,7 +57,17 @@ You will find a config.xml in your binaries folder.<br />
 
 Devicegateway needs at least one inbound and one outbound channel to run.<br />
 To read data from Mongo-Db and send to AWS-cloud the configuration could look like this:<br />
+
 ![example configuration][config-image]
+
+In order to connect to MQTT-broker you need some certificates.
+@Bergmair Thomas: please add some information how to get these files.
+
+Once both connections are established DeviceGateway will start to transfer data.
+
+### configuration of AWS-cloud services
+@Cloud-Crew: please tell about your work
+
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
