@@ -2,9 +2,9 @@
 
 <br />
 
-### First Discussion
+## First Ideas
 
-In our first meeting we wrote down some keywords.
+### In our first meeting we wrote down some keywords.
 
 * soon it was clear to create a Git-Repo for sourcecode management.
 * JSON is a handy format to send data like our measurement data
@@ -12,6 +12,16 @@ In our first meeting we wrote down some keywords.
 * see more topics 
 
 ![Topics we discussed][topics]
+
+### Second Meeting with first concept
+
+* Our initial concept was to use a Raspberry to install MicroServices to aquire measurement data
+* Measurement data has to be written in database
+* Gateway has to read data from Database and write it to MQTT
+* Data from MQTT are stored in cloud-DB
+* Data from cloud-DB are visualized
+
+![Idea of Architecture][architecture]
 
 
 ### How to read data from sensor
@@ -63,3 +73,4 @@ An Outbound-channel has to be able to do the following:
 * inform gateway about process-state
 
 [topics]: images/Topics.png
+[architecture]: images/Architecture.png
