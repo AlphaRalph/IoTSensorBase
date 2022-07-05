@@ -36,7 +36,6 @@
       <a href="#getting-started">Getting Started</a>
       <ul>
 	    <li><a href="#HardwareSelection">Selection of suitable hardware</a></li>
-        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
@@ -73,17 +72,6 @@ Fields of activity:
 ## Getting Started
 
 <a href="docs/OVERVIEW.md">Getting Started Guide</a> includes a description of how to get the project run.
-
-
-### Prerequisites
-
-MongoDB 5.0 under Raspberry Pi OS (64-bit) 
-[https://andyfelong.com/2021/08/mongodb-4-4-under-raspberry-pi-os-64-bit-raspbian64/]
-
-To run the C# .NET Code built on Visual Studio 2017 we used MONO:
-   ```sh
-   sudo apt install mono-complete
-   ```
 
 ### Installation
 
@@ -205,10 +193,6 @@ This should be a starting point for your own configuration.
 Here we have a schema of Device Gateway:
 ![schema DeviceGateway][dwg-image]
 
-Devicegateway needs at least one inbound and one outbound channel to run.
-At config.xml this could look like this:
-![example configuration][config-image]
-
 The first version includes an inbound channel for MONGO-DB,
 and one outbound channel for AWS-Cloud
 
@@ -260,4 +244,3 @@ The sort key attribute is the timestamp (SensorTimestamp), the primary key value
 [linkedin-url]: https://linkedin.com/in/alphaRalph
 [product-screenshot]: images/screenshot_1.png
 [dwg-image]:images/DWG.png
-[config-image]:images/config.PNG
