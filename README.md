@@ -74,13 +74,6 @@ Fields of activity:
 
 <a href="docs/OVERVIEW.md">Getting Started Guide</a> includes a description of how to get the project run.
 
-### HardwareSelection
-
-Since a Raspberry was already provided by the FH-Wels, there was no need to look for an alternative here.
-
-The selection of sensors and LTE modul was done by Andrej Pervan
-
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Prerequisites
 
