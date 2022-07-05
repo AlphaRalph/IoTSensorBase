@@ -23,6 +23,7 @@ This should be a starting point for your own configuration.
 Here we have a schema of Device Gateway:
 ![schema DeviceGateway][dwg-image]
 
+
 The first version includes an inbound channel for MONGO-DB,
 and one outbound channel for AWS-Cloud
 
@@ -51,3 +52,5 @@ Grafana does not have an interface to read the data from the database, so an add
 
 For querying the data primary key values are required: a partition key attribute and a sort key attribute.
 The sort key attribute is the timestamp (SensorTimestamp), the primary key value is the sensor name (SensorName). 
+
+[dwg-image]:images/DWG.png

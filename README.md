@@ -32,9 +32,8 @@
     <li><a href="#about-the-project">About The Project</a></li>
 	<li><a href="#discussion">Discussion</a></li>
     <li><a href="#getting-started">Getting Started</a></li>    
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#Implementation">Implementation Overview</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
+	<li><a href="#Implementation">Implementation Overview</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>    
   </ol>
 </details>
 
@@ -65,10 +64,19 @@ Fields of activity:
 
 What did we <a href="docs/DISCUSSION.md">discuss</a> about before the project started.
 
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 <!-- Getting Started -->
 ## Getting Started
 
 <a href="docs/OVERVIEW.md">Getting Started Guide</a> includes a description of how to get the project run.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- Implementation -->
+## Implementation
+
+Here you can find an overview about the <a href="docs/IMPLEMENTATION_OV.md">implementation</a>.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -101,21 +109,16 @@ In our project we identified four main topics:
 - [x] after exception connections are restored
 
 * **store received data in cloud database**
-- [ ] how to handle message from MQTT broker
-- [ ] which database should be used
-- [ ] how to store in Database
+- [x] how to handle message from MQTT broker
+- [x] which database should be used
+- [x] how to store in Database
 
 * **visualize data**
-- [ ] what tool can be used for visualisation
-- [ ] what database can be used as source for visualisation
-- [ ] how to realise dashboards
+- [x] what tool can be used for visualisation
+- [x] what database can be used as source for visualisation
+- [x] how to realise dashboards
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-<!-- Implementation -->
-## Implementation
-
-Here you can find an overview about the <a href="docs/IMPLEMENTATION_OV.md">implementation</a>.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
@@ -132,4 +135,3 @@ Here you can find an overview about the <a href="docs/IMPLEMENTATION_OV.md">impl
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/alphaRalph
 [product-screenshot]: images/screenshot_1.png
-[dwg-image]:images/DWG.png
