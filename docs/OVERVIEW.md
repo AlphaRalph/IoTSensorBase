@@ -11,7 +11,7 @@
       <ul>
 	    <li><a href="#HardwareSelection">Selection of suitable hardware</a></li>
         <li><a href="#Prerequisites">Prerequisites</a></li>
-		<li><a href="#Install Sensors">Install Sensors</a></li>
+		<li><a href="#InstallSensors">Install Sensors</a></li>
 		<li><a href="#Communication between MicroServices with Sensors">MicroServices</a></li>
 		<li><a href="#Setup MongoDB">Setup MongoDB</a></li>
 		<li><a href="#Configuration of DeviceGateway">Configuration of DeviceGateway</a></li>
@@ -60,6 +60,7 @@ To run the C# .NET Code built on Visual Studio 2017 we used MONO:
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+<!-- InstallSensors -->
 ### Install Sensors
 
 @Andrej: please tell about your experience about installation of sensors
