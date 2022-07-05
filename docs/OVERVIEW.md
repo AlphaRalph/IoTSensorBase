@@ -39,12 +39,15 @@ In a first step only a MongoDbInboundChannes was created.<br />
 Data read by DaviceGateway are forwarded to an outbound-Channel.<br />
 In this case the outbound-Channel connects to AWS-Cloud.<br />
 
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 ### HardwareSelection
 
 Since a Raspberry was already provided by the FH-Wels, there was no need to look for an alternative here.
 
 The selection of sensors and LTE modul was done by Andrej Pervan
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Prerequisites
 
@@ -65,12 +68,17 @@ To run the C# .NET Code built on Visual Studio 2017 we used MONO:
 
 @Andrej: please tell about your experience about installation of sensors
 
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 ### MicroServices
 
 @Andrej: please tell about your experience about communication with sensors
 
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 ### MongoDB
 
+<p align="right">(<a href="#top">back to top</a>)</p>
 ### DeviceGateway
 
 You will find a config.xml in your binaries folder.<br />
@@ -87,9 +95,12 @@ In order to connect to MQTT-broker you need some certificates.<br />
 
 Once both connections are established DeviceGateway will start to transfer data.
 
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 ### CloudServices
 @Cloud-Crew: please tell about your work
 
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
