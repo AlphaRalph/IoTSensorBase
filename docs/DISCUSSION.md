@@ -46,6 +46,6 @@ An Inbound-channel has to be able to do the following:
 * mark data as processed when the gateway has completed the process
 
 An Outbound-channel has to be able to do the following:
-* connect to a cloud-service
-* send data
+* connect to a data-sink
+* write data into data-sink
 * inform gateway about process-state

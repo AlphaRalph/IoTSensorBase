@@ -33,7 +33,7 @@
 	<li><a href="#discussion">Discussion</a></li>
     <li><a href="#getting-started">Getting Started</a></li>    
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#Implementation">Implementation Overview</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
@@ -63,9 +63,7 @@ Fields of activity:
 <!-- discussion -->
 ## Discussion
 
-What did we discuss about before the project started.
-
-<a href="docs/DISCUSSION.md">Discussions</a> done at project start.
+What did we <a href="docs/DISCUSSION.md">discuss</a> about before the project started.
 
 <!-- Getting Started -->
 ## Getting Started
@@ -112,61 +110,12 @@ In our project we identified four main topics:
 - [ ] what database can be used as source for visualisation
 - [ ] how to realise dashboards
 
-### Data acquisition
-
-To make the solution expandable microservices are used to acquire data from sensor.
-Every sensor has its own microservice.
-There are two tasks for these micro-services:
-* to acquire data from sensor
-* write data into database
-
-There are no restrictions about programming language for these services.
-@andrejpervan - please insert some more details.
-
-### Data transportation
-
-The transportation of data from source to destination is handled by a C# program called DeviceGateway.
-This DeviceGateway has to coordinate InboundChannels and OutboundChannels defined in a config.xml.
-In case there is no config.xml when DeviceGateway starts the first time, a dummy config.xml will be created.
-This should be a starting point for your own configuration.
-
-Here we have a schema of Device Gateway:
-![schema DeviceGateway][dwg-image]
-
-The first version includes an inbound channel for MONGO-DB,
-and one outbound channel for AWS-Cloud
-
-#### read data from MONGO inbound-channel
-
-Be aware of the following topics:
-* The configuration contains the connection-string to connect to.
-* The connection-string is case sensitiv!
-* This database must contain a Collection 'Values'! ( case sensitiv again )
-  In the first version, this collectionname is hard coded.
-* 
-
-
-### Data storage in cloud
-
-Various measurement data received via MQTT must be stored in a database.
-@BergmairThomas Please insert the result of your research here.
-
-### Data processing
-
-In order to visualize the measured data, which is located in the AWS DynamoDB, Grafana was used in this project, which has to be installed first. 
-
-[https://grafana.com/grafana/download/8.4.6?platform=windows]
-
-Grafana does not have an interface to read the data from the database, so an additional plugin is needed. 
-
-[https://github.com/TLV-PMOP/grafana-dynamodb-datasource]
-
-For querying the data primary key values are required: a partition key attribute and a sort key attribute.
-The sort key attribute is the timestamp (SensorTimestamp), the primary key value is the sensor name (SensorName). 
-
-
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+<!-- Implementation -->
+## Implementation
+
+Here you can find an overview about the <a href="docs/IMPLEMENTATION_OV.md">implementation</a>.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
