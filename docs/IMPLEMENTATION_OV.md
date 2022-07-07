@@ -38,8 +38,6 @@ Here we have a schema of Device Gateway:
 
 To make the solution flexible two interfaces are implemented
 * IInboundChannel
-* IOutboundChannel
-
 ```csharp
     public interface IInboundChannel
     {
@@ -49,6 +47,8 @@ To make the solution flexible two interfaces are implemented
         void doConnect(string ConnectionString);
     }
 ```
+
+* IOutboundChannel
 ```csharp
     public interface IOutboundChannel
     {
@@ -58,6 +58,16 @@ To make the solution flexible two interfaces are implemented
         event EventHandler sentDataEventHandler;
     }
 ```
+
+The '''csharp static class ChannelProvicer''' returns lists of channels build from config-settings.
+
+'''csharp
+public static class ChannelProvider
+{
+	public static List<IInboundChannel> getInboundChannels()
+	public static List<IOutboundChannel> getOutboundChannels()
+}
+'''
 
 #### ChannelProvider
 
