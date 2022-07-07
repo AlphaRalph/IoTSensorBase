@@ -36,6 +36,8 @@ This should be a starting point for your own configuration.
 Here we have a schema of Device Gateway:
 ![schema DeviceGateway][dwg-image]
 
+#### Interfaces
+
 To make the solution flexible two interfaces are implemented
 * IInboundChannel
 ```csharp
@@ -59,18 +61,20 @@ To make the solution flexible two interfaces are implemented
     }
 ```
 
+#### ChannelProvider
+
 The static class ChannelProvicer returns lists of channels build from config-settings.
 When creating the channels doConnect is called, this means the channels are ready to use.
 
 ```csharp
 	public static class ChannelProvider
 	{
-		public static List<IInboundChannel> getInboundChannels()
-		public static List<IOutboundChannel> getOutboundChannels()
+		public static List<IInboundChannel> getInboundChannels(){}
+		public static List<IOutboundChannel> getOutboundChannels(){}
 	}
 ```
 
-#### ChannelProvider
+
 
 
 
