@@ -81,11 +81,12 @@ ChannelProvider calls the following line:
 	IInboundChannel newChannel = (IInboundChannel)Activator.CreateInstance(Type.GetType(channelConf.ChannelName));
 ```
 ChannelName from config.xml has to fit the Namespace and Classname of channel:
-*example from dummy config.xml
+* example from dummy config.xml
 ```xml
 	<ChannelName>DeviceGateway.OutboundChannels.AwsOutboundChannel</ChannelName>
 ```
-*example from solution
+
+* example from solution
 ```csharp
 	namespace DeviceGateway.OutboundChannels
 	{
@@ -94,7 +95,7 @@ ChannelName from config.xml has to fit the Namespace and Classname of channel:
 			// some code
 		}
 	}
-´´´
+```
 
 
 The first version includes an inbound channel for MONGO-DB,
