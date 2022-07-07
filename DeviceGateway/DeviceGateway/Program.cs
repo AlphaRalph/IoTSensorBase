@@ -1,5 +1,4 @@
-﻿using DeviceGateway.InboundChannels;
-using System;
+﻿using System;
 using System.Threading;
 
 namespace DeviceGateway
@@ -12,7 +11,10 @@ namespace DeviceGateway
             var token = source.Token;
             string _exitMessage = string.Empty;
 
-                DeviceGateway deviceGateway = new DeviceGateway(ChannelProvider.getInboundChannels(), ChannelProvider.getOutboundChannels(), "Test", 30);
+                DeviceGateway deviceGateway = new DeviceGateway(ChannelProvider.getInboundChannels(), 
+                                                                ChannelProvider.getOutboundChannels(), 
+                                                                DeviceGWConfiguration.Deserialize("Config.xml").DWGName ,
+                                                                30);
                 // deviceGateway.doSyncronisation();
                 var task = deviceGateway.Synchronize(token);//.Wait();            
                 while (_exitMessage != "EXIT")

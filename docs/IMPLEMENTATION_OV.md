@@ -2,7 +2,18 @@
 
 <br />
 
-### Data acquisition
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li><a href="#Acquisition">Data Acquisition</a></li>
+	<li><a href="#Transportation">Data Transportation</a></li>
+    <li><a href="#Cloudstorage">Store data in cloud</a></li>    
+	<li><a href="#CloudProcessing">Process data in cloud</a></li>   
+  </ol>
+</details>
+
+### Acquisition
 
 To make the solution expandable microservices are used to acquire data from sensor.
 Every sensor has its own microservice.
@@ -13,7 +24,9 @@ There are two tasks for these micro-services:
 There are no restrictions about programming language for these services.
 @andrejpervan - please insert some more details.
 
-### Data transportation
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+### Transportation
 
 The transportation of data from source to destination is handled by a C# program called DeviceGateway.
 This DeviceGateway has to coordinate InboundChannels and OutboundChannels defined in a config.xml.
@@ -23,9 +36,37 @@ This should be a starting point for your own configuration.
 Here we have a schema of Device Gateway:
 ![schema DeviceGateway][dwg-image]
 
+To make the solution flexible two interfaces are implemented
+* IInboundChannel
+* IOutboundChannel
+
+```csharp
+    public interface IInboundChannel
+    {
+        List<JObject> getInboundData();
+        void updateDataToDone(JObject oToUpdate);
+        void deleteData(object oToDelete );
+        void doConnect(string ConnectionString);
+    }
+```
+```csharp
+    public interface IOutboundChannel
+    {
+        bool sendData(List<JObject> toSend);
+        void doConnect(string ConnectionString);
+        void onSendCompleted(EventArgs e);
+        event EventHandler sentDataEventHandler;
+    }
+```
+
+#### ChannelProvider
+
+
 
 The first version includes an inbound channel for MONGO-DB,
 and one outbound channel for AWS-Cloud
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 #### read data from MONGO inbound-channel
 
@@ -34,13 +75,17 @@ Be aware of the following topics:
 * The connection-string is case sensitiv!
 * This database must contain a Collection 'Values'! ( case sensitiv again )
   In the first version, this collectionname is hard coded.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
   
-### Data storage in cloud
+### Cloudstorage
 
 Various measurement data received via MQTT must be stored in a database.
 @BergmairThomas Please insert the result of your research here.
 
-### Data processing
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+### CloudProcessing
 
 In order to visualize the measured data, which is located in the AWS DynamoDB, Grafana was used in this project, which has to be installed first. 
 
@@ -52,5 +97,7 @@ Grafana does not have an interface to read the data from the database, so an add
 
 For querying the data primary key values are required: a partition key attribute and a sort key attribute.
 The sort key attribute is the timestamp (SensorTimestamp), the primary key value is the sensor name (SensorName). 
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 [dwg-image]:images/DWG.png
