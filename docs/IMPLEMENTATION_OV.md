@@ -59,14 +59,14 @@ To make the solution flexible two interfaces are implemented
     }
 ```
 
-The '''csharp static class ChannelProvicer''' returns lists of channels build from config-settings.
+The static class ChannelProvicer returns lists of channels build from config-settings.
 
 '''csharp
-public static class ChannelProvider
-{
-	public static List<IInboundChannel> getInboundChannels()
-	public static List<IOutboundChannel> getOutboundChannels()
-}
+	public static class ChannelProvider
+	{
+		public static List<IInboundChannel> getInboundChannels()
+		public static List<IOutboundChannel> getOutboundChannels()
+	}
 '''
 
 #### ChannelProvider
