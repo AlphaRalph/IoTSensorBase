@@ -63,7 +63,7 @@ To make the solution flexible two interfaces are implemented
 
 #### ChannelProvider
 
-The static class ChannelProvicer returns lists of channels build from config-settings.
+The static class ChannelProvicer returns lists of channels build from config-settings. <br />
 When creating the channels doConnect is called, this means the channels are ready to use.
 
 ```csharp
@@ -74,8 +74,27 @@ When creating the channels doConnect is called, this means the channels are read
 	}
 ```
 
+How to create channel from config-string:
 
-
+ChannelProvider calls the following line:
+```csharp
+	IInboundChannel newChannel = (IInboundChannel)Activator.CreateInstance(Type.GetType(channelConf.ChannelName));
+```
+ChannelName from config.xml has to fit the Namespace and Classname of channel:
+*example from dummy config.xml
+```xml
+	<ChannelName>DeviceGateway.OutboundChannels.AwsOutboundChannel</ChannelName>
+```
+*example from solution
+```csharp
+	namespace DeviceGateway.OutboundChannels
+	{
+		class AwsOutboundChannel : IOutboundChannel
+		{
+			// some code
+		}
+	}
+´´´
 
 
 The first version includes an inbound channel for MONGO-DB,
