@@ -79,6 +79,7 @@ To run the C# .NET Code built on Visual Studio 2017 we used MONO:
 ### MongoDB
 
 <p align="right">(<a href="#top">back to top</a>)</p>
+
 ### DeviceGateway
 
 You will find a config.xml in your binaries folder.<br />

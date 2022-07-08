@@ -48,7 +48,7 @@ namespace DeviceGateway.Config
                 Console.WriteLine("Konfiguration nicht gefunden - schreibe Standard");
                 config = new DeviceGWConfiguration();
                 config.InboundChannelConfigurations.Add(new InboundChannelConfiguration("DeviceGateway.InboundChannels.FileInboundChannel", "yasdasd"));
-                config.OutboundChannelConfigurations.Add(new OutboundChannelConfiguration("DeviceGateway.OutboundChannels.AwsOutboundChannel", "a2eowo00nh8hc6-ats.iot.eu-central-1.amazonaws.com"));
+                config.OutboundChannelConfigurations.Add(new OutboundChannelConfiguration("DeviceGateway.OutboundChannels.AwsOutboundChannel", "enter_your_connection_data_here.amazonaws.com"));
                 Serialize(file, config);
             }
 

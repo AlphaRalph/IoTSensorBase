@@ -52,7 +52,6 @@ namespace DeviceGateway
                 catch (Exception e)
                 {
                     Console.WriteLine("UIJE:" + e.Message);
-                    Console.ReadLine();
                 }
                 
             }

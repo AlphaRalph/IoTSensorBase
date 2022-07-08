@@ -13,7 +13,7 @@
   </ol>
 </details>
 
-### Acquisition
+## Acquisition
 
 To make the solution expandable microservices are used to acquire data from sensor.
 Every sensor has its own microservice.
@@ -26,7 +26,7 @@ There are no restrictions about programming language for these services.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-### Transportation
+## Transportation
 
 The transportation of data from source to destination is handled by a C# program called DeviceGateway.
 This DeviceGateway has to coordinate InboundChannels and OutboundChannels defined in a config.xml.
@@ -36,7 +36,7 @@ This should be a starting point for your own configuration.
 Here we have a schema of Device Gateway:
 ![schema DeviceGateway][dwg-image]
 
-#### Interfaces
+### Interfaces
 
 To make the solution flexible two interfaces are implemented
 * IInboundChannel
@@ -61,9 +61,10 @@ To make the solution flexible two interfaces are implemented
     }
 ```
 
-#### ChannelProvider
+### ChannelProvider
 
-The static class ChannelProvicer returns lists of channels build from config-settings. <br />
+The static class ChannelProvicer returns lists of channels built from config-settings. <br />
+The configured channel has to implement the IInboundChannel or IOutboundChannel interface. <br />
 When creating the channels doConnect is called, this means the channels are ready to use.
 
 ```csharp
@@ -74,19 +75,24 @@ When creating the channels doConnect is called, this means the channels are read
 	}
 ```
 
-How to create channel from config-string:
+How to create channel from config-string?
 
 ChannelProvider calls the following line:
 ```csharp
 	IInboundChannel newChannel = (IInboundChannel)Activator.CreateInstance(Type.GetType(channelConf.ChannelName));
 ```
-ChannelName from config.xml has to fit the Namespace and Classname of channel:
+ChannelName in config.xml has to be equal to Namespace + Classname of channel-implementation:
 * example from dummy config.xml
 ```xml
-	<ChannelName>DeviceGateway.OutboundChannels.AwsOutboundChannel</ChannelName>
+  <OutboundChannelConfigurations>
+    <OutboundChannelConfiguration>
+      <ChannelName>DeviceGateway.OutboundChannels.AwsOutboundChannel</ChannelName>
+      <ConnectionString>your-connection-string</ConnectionString>
+    </OutboundChannelConfiguration>
+  </OutboundChannelConfigurations>
 ```
 
-* example from solution
+* example for corresponding namespace and classname
 ```csharp
 	namespace DeviceGateway.OutboundChannels
 	{
@@ -103,7 +109,7 @@ and one outbound channel for AWS-Cloud
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-#### read data from MONGO inbound-channel
+### read data from MONGO inbound-channel
 
 Be aware of the following topics:
 * The configuration contains the connection-string to connect to.
@@ -113,14 +119,14 @@ Be aware of the following topics:
 
 <p align="right">(<a href="#top">back to top</a>)</p>
   
-### Cloudstorage
+## Cloudstorage
 
 Various measurement data received via MQTT must be stored in a database.
 @BergmairThomas Please insert the result of your research here.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-### CloudProcessing
+## CloudProcessing
 
 In order to visualize the measured data, which is located in the AWS DynamoDB, Grafana was used in this project, which has to be installed first. 
 

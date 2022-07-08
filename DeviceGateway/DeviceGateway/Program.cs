@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DeviceGateway.Config;
+using System;
 using System.Threading;
+
 
 namespace DeviceGateway
 {
