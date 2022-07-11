@@ -8,6 +8,11 @@
   <ol>
     <li><a href="#Acquisition">Data Acquisition</a></li>
 	<li><a href="#Transportation">Data Transportation</a></li>
+		<ul>
+	        <li><a href="#Interfaces">Interfaces</a></li>
+	        <li><a href="#ChannelProvider">ChannelProvider</a></li>
+	        <li><a href="#MongoDBInboundChannel">Mongo Inbound Channel</a></li>
+	   </ul>
     <li><a href="#Cloudstorage">Store data in cloud</a></li>    
 	<li><a href="#CloudProcessing">Process data in cloud</a></li>   
   </ol>
@@ -35,6 +40,20 @@ This should be a starting point for your own configuration.
 
 Here we have a schema of Device Gateway:
 ![schema DeviceGateway][dwg-image]
+
+DataSource could be
+* MongoDB
+* Text-File
+* TCP-Port
+* and much more
+
+Receiver could be
+* MQTT
+* Database
+* File
+* and much more
+
+For each source or receiver type you need to implement a Channel!
 
 ### Interfaces
 
@@ -109,13 +128,40 @@ and one outbound channel for AWS-Cloud
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-### read data from MONGO inbound-channel
+### MongoDBInboundChannel
 
 Be aware of the following topics:
 * The configuration contains the connection-string to connect to.
 * The connection-string is case sensitiv!
 * This database must contain a Collection 'Values'! ( case sensitiv again )
-  In the first version, this collectionname is hard coded.
+* In the first version, this collectionname is hard coded.
+
+To get data from collection the following code is executed:
+
+```csharp
+	var allDoc = db.GetCollection<BsonDocument>("Values");
+	var filter = Builders<BsonDocument>.Filter.Eq("Status", 1);
+	var documents = allDoc.Find(filter).ToList();
+```
+This means all documents from collection "Values" are read, but those with "Status" not equal 1 are skipped.
+The returned documents have the type:
+```csharp
+	List<BsonDocument>
+```
+These documents can easily be converted into a JSON document.
+But for this step you have to remove the original _id property. I got exeptions when converting this property into JSON.
+The oriId is used later when updating the set of data in SourceDB.
+
+```csharp
+	// save the document ID before removing from BSON
+	string docId = doc.GetValue("_id").ToString();
+	doc.Remove("_id");
+	// add original ID to JSON                
+	JObject newJsonDoc = JObject.Parse(doc.ToJson());
+	newJsonDoc.Add("oriId", docId);
+```
+
+When retrieving data from 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
   
