@@ -12,6 +12,7 @@
 	        <li><a href="#Interfaces">Interfaces</a></li>
 	        <li><a href="#ChannelProvider">ChannelProvider</a></li>
 	        <li><a href="#MongoDBInboundChannel">Mongo Inbound Channel</a></li>
+	        <li><a href="#AwsOutboundChannel">AwsOutboundChannel</a></li>
 	   </ul>
     <li><a href="#Cloudstorage">Store data in cloud</a></li>    
 	<li><a href="#CloudProcessing">Process data in cloud</a></li>   
@@ -122,9 +123,8 @@ ChannelName in config.xml has to be equal to Namespace + Classname of channel-im
 	}
 ```
 
-
-The first version includes an inbound channel for MONGO-DB,
-and one outbound channel for AWS-Cloud
+The first version includes an inbound channel for <a href="#MongoDBInboundChannel">Mongo-DB</a>,
+and one outbound channel for <a href="#AwsOutboundChannel">AWS-Cloud</a>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -161,8 +161,43 @@ The oriId is used later when updating the set of data in SourceDB.
 	newJsonDoc.Add("oriId", docId);
 ```
 
-When retrieving data from 
+<p align="right">(<a href="#top">back to top</a>)</p>
 
+### AwsOutboundChannel
+
+Be aware of the following topics:
+* for X509Certificate we require a file called AmazonRootCA1.crt in binaries folder
+* for X509Certificate2 we require a file called certificate.cert.pfx in binaries folder
+* to create the MQTT Client we use this protocol: MqttSslProtocols.TLSv1_2
+* documents are sent one by one , without compression
+
+
+When sending documents in a first step data not necessary in cloud are removed from JSON-document
+```csharp
+	private void removeOrgData(JObject oneMessageToSend)
+	{
+	    oneMessageToSend.Remove("IOT-Topic");
+	    oneMessageToSend.Remove("Status");
+	    oneMessageToSend.Remove("oriId");
+	}
+```
+
+IoT-topic is removed from dokument and stored in local variable because it is used at mqttClient:
+```csharp
+    topic = oneMessage.GetValue("IOT-Topic").ToString();
+	// remove fields not needed in cloud
+    removeOrgData(oneMessage);
+	mqttClient.Publish(topic, Encoding.UTF8.GetBytes($"{oneMessage}"));
+```
+After sending without exception we raise an event to inform IInboundChannels 
+```csharp
+	SentDataEventArgs sentDataEventArgs = new SentDataEventArgs();
+	var sentDataID = new JObject();
+	sentDataID.Add("oriId", sOriId);
+	sentDataEventArgs.SentData = sentDataID;
+	sentDataEventArgs.IsSuccessful = true;
+	onSendCompleted(sentDataEventArgs);
+```
 <p align="right">(<a href="#top">back to top</a>)</p>
   
 ## Cloudstorage
