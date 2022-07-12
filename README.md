@@ -62,14 +62,18 @@ Fields of activity:
 <!-- discussion -->
 ## Discussion
 
+From a set of keywords to a concept idea.
 What did we <a href="docs/DISCUSSION.md">discuss</a> about before the project started.
+
+At the end we agreed the following architecture:
+![IoT SensorBase][Architecture]
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- Getting Started -->
 ## Getting Started
 
-<a href="docs/OVERVIEW.md">Getting Started Guide</a> includes a description of how to get the project run.
+<a href="docs/OVERVIEW.md">Getting Started Guide</a> includes a description of how to get the solution run.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -135,3 +139,4 @@ In our project we identified four main topics:
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/alphaRalph
 [product-screenshot]: images/screenshot_1.png
+[Architecture]: images/IoT-SensorBase.png
