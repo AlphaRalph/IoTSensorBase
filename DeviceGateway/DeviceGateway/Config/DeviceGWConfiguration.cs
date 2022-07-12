@@ -49,7 +49,9 @@ namespace DeviceGateway.Config
                 config = new DeviceGWConfiguration();
                 config.InboundChannelConfigurations.Add(new InboundChannelConfiguration("DeviceGateway.InboundChannels.FileInboundChannel", "yasdasd"));
                 config.OutboundChannelConfigurations.Add(new OutboundChannelConfiguration("DeviceGateway.OutboundChannels.AwsOutboundChannel", "enter_your_connection_data_here.amazonaws.com"));
-                Serialize(file, config);
+                config.DWGName = "dummyIotTopic";
+                config.sleepTime = 30; // sleeptime in seconds
+                Serialize(file, config);            
             }
 
             return config;

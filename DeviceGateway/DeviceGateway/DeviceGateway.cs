@@ -19,12 +19,12 @@ namespace DeviceGateway
         private int _iSleeptime;
         //DeviceGWConfiguration config;
 
-        public DeviceGateway()
+        /* public DeviceGateway()
         {
             Console.WriteLine("starting Gateway...");
             // read Config-File
             //config = DeviceGWConfiguration.Deserialize("config.xml");
-        }
+        }*/
 
         public DeviceGateway ( List<IInboundChannel> inboundChannels, List<IOutboundChannel> outboundChannels , string sDeviceGatewayName, int iSleeptime)
         {

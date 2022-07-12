@@ -5,6 +5,7 @@
 	        <li><a href="#ChannelProvider">ChannelProvider</a></li>
 	        <li><a href="#MongoDBInboundChannel">Mongo Inbound Channel</a></li>
 	        <li><a href="#AwsOutboundChannel">AwsOutboundChannel</a></li>
+	        <li><a href="#DeviceGateway">DeviceGateway</a></li>
   </ol>
 </details>	
 
@@ -49,6 +50,7 @@ To make the solution flexible two interfaces are implemented
         event EventHandler sentDataEventHandler;
     }
 ```
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 ### ChannelProvider
 
@@ -167,5 +169,35 @@ After sending without exception we raise an event to inform IInboundChannels
 	sentDataEventArgs.IsSuccessful = true;
 	onSendCompleted(sentDataEventArgs);
 ```
+
+### DeviceGateway
+
+#### When creating a new instance of DeviceGateway you need the following:
+
+```csharp
+public DeviceGateway ( List<IInboundChannel> inboundChannels, 
+					   List<IOutboundChannel> outboundChannels , string sDeviceGatewayName, int iSleeptime)
+	{
+		//some code
+	}
+```
+* List of inbound Channels has to be defined in config.xml and will be created by  <a href="#ChannelProvider">ChannelProvider</a>
+* List of outbound Channels has to be defined in config.xml and will be created <a href="#ChannelProvider">ChannelProvider</a>
+* DeviceGatewayname is used as IoT-topic later and can be used from config.xml
+* iSleeptime can be used from config.xml
+
+
+#### After creating an instance of DeviceGateway the synchronisation can be started:
+```csharp
+var task = deviceGateway.Synchronize(token);
+```
+DeviceGateway will iterate through all the IInboundChannels to get all the available data.
+All available Inbound-Documents will be distributed to all configured IOutboundChannels.
+After sending a document the ***IOutboundChannel.sentDataEventHandler*** will call the connected method ***DeviceGateway.updateReceivedData***.
+This method calls every ***IInboundChannel.updateDataToDone(JObject oToUpdate)*** .
+This leads to an update of documents in InboundChannel so the document can not be sent again.
+In case of MongoDbInboundChannel the status will be set to '2'.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 [dwg-image]:images/DWG.png
