@@ -206,7 +206,7 @@ After sending without exception we raise an event to inform IInboundChannels
 
 Various measurement data received via MQTT must be stored in a database.
 
-Find more information <a href="docs/CLOUDSTORAGE_OV.md">here</a>.
+Find more information <a href="CLOUDSTORAGE_OV.md">here</a>.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
