@@ -28,7 +28,7 @@ There are two tasks for these micro-services:
 * write data into database
 
 There are no restrictions about programming language for these services.
-Find more information <a href="docs/ACQUISITION_OV.md">here</a>.
+Find more information <a href="ACQUISITION_OV.md">here</a>.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -39,7 +39,7 @@ This DeviceGateway has to coordinate InboundChannels and OutboundChannels define
 In case there is no config.xml when DeviceGateway starts the first time, a dummy config.xml will be created.
 This should be a starting point for your own configuration.
 
-Find more information <a href="docs/TRANSPORTATION_OV.md">here</a>.
+Find more information <a href="TRANSPORTATION_OV.md">here</a>.
 
 Here we have a schema of Device Gateway:
 ![schema DeviceGateway][dwg-image]
@@ -223,7 +223,7 @@ Grafana does not have an interface to read the data from the database, so an add
 For querying the data primary key values are required: a partition key attribute and a sort key attribute.
 The sort key attribute is the timestamp (SensorTimestamp), the primary key value is the sensor name (SensorName). 
 
-Find more information <a href="docs/CLOUDPROCESSING_OV.md">here</a>.
+Find more information <a href="CLOUDPROCESSING_OV.md">here</a>.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
