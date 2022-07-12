@@ -1,5 +1,5 @@
 <details>
-  <summary>implemented with C#</summary>
+  <summary>DeviceGateway Components</summary>
   <ol>
 	        <li><a href="#Interfaces">Interfaces</a></li>
 	        <li><a href="#ChannelProvider">ChannelProvider</a></li>
@@ -167,3 +167,5 @@ After sending without exception we raise an event to inform IInboundChannels
 	sentDataEventArgs.IsSuccessful = true;
 	onSendCompleted(sentDataEventArgs);
 ```
+
+[dwg-image]:images/DWG.png

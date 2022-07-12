@@ -61,5 +61,3 @@ The sort key attribute is the timestamp (SensorTimestamp), the primary key value
 Find more information <a href="CLOUDPROCESSING_OV.md">here</a>.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-[dwg-image]:images/DWG.png
