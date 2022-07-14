@@ -1,4 +1,4 @@
-<details>
+  <details>
   <summary>DeviceGateway Components</summary>
   <ol>
 	        <li><a href="#Interfaces">Interfaces</a></li>
@@ -6,6 +6,7 @@
 	        <li><a href="#MongoDBInboundChannel">Mongo Inbound Channel</a></li>
 	        <li><a href="#AwsOutboundChannel">AwsOutboundChannel</a></li>
 	        <li><a href="#DeviceGateway">DeviceGateway</a></li>
+	        <li><a href="#DeviceGatewayTest">DeviceGateway.Test</a></li>
   </ol>
 </details>	
 
@@ -191,12 +192,16 @@ public DeviceGateway ( List<IInboundChannel> inboundChannels,
 ```csharp
 var task = deviceGateway.Synchronize(token);
 ```
-DeviceGateway will iterate through all the IInboundChannels to get all the available data.
-All available Inbound-Documents will be distributed to all configured IOutboundChannels.
-After sending a document the ***IOutboundChannel.sentDataEventHandler*** will call the connected method ***DeviceGateway.updateReceivedData***.
-This method calls every ***IInboundChannel.updateDataToDone(JObject oToUpdate)*** .
-This leads to an update of documents in InboundChannel so the document can not be sent again.
-In case of MongoDbInboundChannel the status will be set to '2'.
+DeviceGateway will iterate through all the IInboundChannels to get all the available data.<br/>All available Inbound-Documents will be distributed to all configured IOutboundChannels.<br/>After sending a document the ***IOutboundChannel.sentDataEventHandler*** will call the connected method ***DeviceGateway.updateReceivedData***.<br/>This method calls every ***IInboundChannel.updateDataToDone(JObject oToUpdate)*** .<br />This leads to an update of documents in InboundChannel so the document can not be sent again.<br />In case of MongoDbInboundChannel the status will be set to '2'.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+### DeviceGatewayTest
+
+For testing a DeviceGateway.Test solution was created. <br/>
+When first tests should be integrated we discovered some problems.
+Architecture of DeviceGateway solution was not built for testing.
+So the solution has to be refactored to enable adequat testing.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
