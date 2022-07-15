@@ -177,10 +177,12 @@ Verify the plugin was installed.
 To check if the installation was done correctly, you have to log in to your Grafana account and click on Configuration Settings -> Data Sources 
 
 ![IoT SensorBase][PlugIn2]
+![IoT SensorBase][PlugIn32]
 
 This leads to the configuration page, where you can search for the installed plugin in the plugins teb. 
 
 ![IoT SensorBase][PlugIn3]
+
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -196,4 +198,5 @@ This leads to the configuration page, where you can search for the installed plu
 [PlugIn]: images/VerifyPlugin.PNG
 [PlugIn2]: images/DataSources.png
 [PlugIn3]: images/ConfigurationPlugin.png
+[PlugIn32]: images/DataSources2.png
 
