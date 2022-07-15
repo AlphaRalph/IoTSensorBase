@@ -148,8 +148,6 @@ The easiest way to do this is via an online converter. Like: https://rvssl.com/s
 
 If you have followed all the steps correctly and the certificates are correctly placed in the binaries folder, the DeviceGateway should be able to connect to AWS IOT Core.
 
-It continues with the creation of a log database to monitor and verify the messages that are sent without filling the database with false data. 
-To do this, search for "CloudWatch".
 
 
 
@@ -163,3 +161,16 @@ To do this, search for "CloudWatch".
 [CreateNewThing2]: images/CreateNewThing2.PNG
 [policy1]: images/Policy1.PNG
 [Zertifikate]: images/Zertifikate.PNG
+
+
+### Visualization 
+
+To visualize the measurement data, the open source platform Grafana is used. 
+Download Grafana from the homepage. If necessary, see also the installation instructions. 
+	- Get Grafana
+	[https://grafana.com/grafana/download?platform=windows]
+	- Installation guides
+	[https://www.tutorialandexample.com/grafana-tutorial
+	
+
+
