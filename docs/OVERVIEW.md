@@ -172,13 +172,25 @@ Then click on "create table". Now the database is ready to be filled.
 ### Connect IOT CORE / Cloud Watch / DynamoDB
 The last step in setting up the aws Cloud is to link the individual services together. This is done via the MQTT Broker (IOT Core). To do this, search for "IOT Core".  Click on "Act" and then on "Rules". To create a rule click on "create". 
 
-![IoT SensorBase][Rule1]
-![IoT SensorBase][Rule3]
-![IoT SensorBase][Rule4]
-![IoT SensorBase][Rule5]
+At the beginning, you assign a name for the rule. The name does not matter. Next, click on "edit" at Rule query statement and add the following code:<br />
+SELECT SensorData,SensorName,SensorType,SensorTimestamp,SensorUnit, cast(topic(2) AS String) as DeviceID, timestamp() as DatenbankTimestamp FROM 'device/+/data'
 
+![IoT SensorBase][Rule1]
+
+Next, select "add new Action" from "Actions". Click on "Send message data to CloudWatch logs" and select your created CloudWatch for logging.
+![IoT SensorBase][Rule3]
+
+For logging errors, you can either use Cloudwatch from before, or if you have created a standalone Cloudwatch, you can use this.
+![IoT SensorBase][Rule4]
+
+Now it would be a great time for testing. Send Data from your client and check in the CloudWatch if Data arrive. 
+Last but not least we have to connect or DynamoDB to the MQTTClient. Click on "add Action" and then on "Split message into multiple columns of a DynamoDB table (DynamoDBv2)" choose the DynamoDB we created in the list. 
 ![IoT SensorBase][Rule2]
 
+At the end it should look like this:
+![IoT SensorBase][Rule5]
+
+The aws Cloudservice is now set up!!
 
 # Visualization 
 
