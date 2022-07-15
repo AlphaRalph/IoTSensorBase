@@ -177,6 +177,7 @@ Verify the plugin was installed.
 To check if the installation was done correctly, you have to log in to your Grafana account and click on Configuration Settings -> Data Sources 
 
 
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
