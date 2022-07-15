@@ -43,19 +43,19 @@
 ![IoT SensorBase][product-screenshot]
 
 The aim is to develop a sensor platform, which is independent of the measured variables, records data and sends it to a cloud service.
-In cloud-services this data is analysed and visualised.
+In cloud services this data is analysed and visualised.
 
 Project scope:
 * Familiarisation with current IoT technologies
 * Creation of a universal software architecture
-* Realisation of a Showcase, e.g."Environmental measurement"
+* Realisation of a showcase, e.g."environmental measurement"
 
 Fields of activity:
-* Softwaredevelopment/programming with .NET, Python
+* Software development/programming with .NET, Python
 * Database and SQL
-* Cloud Services
+* Cloud services
 * Sensors
-* Communication ( WIFI,LTE,etc...)
+* Communication (WIFI,LTE etc)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -92,20 +92,20 @@ In our project we identified four main topics:
 * **reading data from various sensors and write data to database**
 - [x] implement template for micro service 
 	- [x] write data to MongoDB at localhost
-	- [x] acquire temperature from sensor
+	- [x] acquire temperature and humidity from sensor
 	- [x] acquire CO2 level from sensor
 - [x] autostart micro services at startup
 - [ ] ...
 
 * **establish a connection to cloud and send data in correct format**
-- [x] implement a DeviceGateway to connect to source DB and MQTT-Broker
+- [x] implement a device gateway to connect to source DB and MQTT-Broker
 - [ ] handle KEY Files for authentification and authorisation
 	- [x] creation of KEY Files is done manually
 	- [ ] fully authomated handling of new devices
 - [x] retriev data from the source DB cyclically
 - [x] forward data to configured outbound channel
-- [x] IoT-topic can be configured ( could be a serial number )
-- [x] outbound channes sends all data one by one 
+- [x] IoT topic can be configured (could be a serial number)
+- [x] outbound channel sends all data one by one 
 	- [ ] outbound channel can be configured to send all data in a bulk
 	- [ ] outbound channel can be configured to compress data
 - [x] multiple channes are configurable
