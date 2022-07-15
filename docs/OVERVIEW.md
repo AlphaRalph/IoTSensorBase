@@ -41,7 +41,7 @@ In this case the outbound-Channel connects to AWS-Cloud.<br />
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-### HardwareSelection
+## HardwareSelection
 
 Since a Raspberry was already provided by the FH-Wels, there was no need to look for an alternative here.
 
@@ -70,23 +70,23 @@ First, you need to create an account in Amazon AWS Cloud.
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-### InstallSensors
+## InstallSensors
 
 @Andrej: please tell about your experience about installation of sensors
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-### MicroServices
+## MicroServices
 
 @Andrej: please tell about your experience about communication with sensors
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-### MongoDB
+## MongoDB
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-### DeviceGateway
+## DeviceGateway
 
 You will find a config.xml in your binaries folder.<br />
 
@@ -111,7 +111,11 @@ Once both connections are established DeviceGateway will start to transfer data.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-### CloudServices
+## CloudServices
+First of all make sure tat you have chosen the right region. In our case it is eu-central.
+![IoT SensorBase][PlugIn5]
+
+### Create a thing
 We start the process by creating a new Thing. Go to IOT Core. Click on "Manage" and then on "Things". To start the creation click on "Create a new Thing". 
 For the IOTSensorBase we create a "SingleThing".
 
@@ -147,6 +151,12 @@ In order to establish an MQTT connection with the AWS IoT platform, the root CA 
 The easiest way to do this is via an online converter. Like: https://rvssl.com/ssl-converter/ 
 
 If you have followed all the steps correctly and the certificates are correctly placed in the binaries folder, the DeviceGateway should be able to connect to AWS IOT Core.x
+
+### Create Trace Database
+Next, we create a log database to track and review incoming messages before loading them into the database. This prevents unnecessary or erroneous data in the database. 
+To do this, search "Cloud Watch" - Click on "Log groups" and then click "new log group"
+
+
 
 # Visualization 
 
