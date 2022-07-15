@@ -139,5 +139,5 @@ Then click on "create thing". IMPORTANT: A window will appear instructing you to
 [config-image]: images/config.PNG
 [CreateNewThing1]: images/CreateNewThing1.PNG
 [CreateNewThing2]: images/CreateNewThing2.PNG
-[policy1]: images/policy1.png
-[Zertifikate]:images/Zertifikate.png
+[policy1]: images/Policy1.PNG
+[Zertifikate]: images/Zertifikate.PNG
