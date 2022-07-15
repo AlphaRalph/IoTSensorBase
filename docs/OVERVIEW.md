@@ -58,8 +58,10 @@ To run the C# .NET Code built on Visual Studio 2017 we used MONO:
    ```sh
    sudo apt install mono-complete
    ```
-
-@Cloud-Crew: what do we need from your side to setup this project
+To run the IOT sensor base, we rely on AWS cloud services. Specifically, the following services are required to build the IOT Sensor Base: 
+aws IOT-CORE
+aws DynamoDB
+aws CloudWatch 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
