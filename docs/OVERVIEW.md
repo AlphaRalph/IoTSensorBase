@@ -126,7 +126,8 @@ Then create a new policy like the following sample and attach it to the "Thing".
 
 ![IoT SensorBase][policy1]
 
-Then click on "create thing". IMPORTANT: A window will appear instructing you to download the certificates. Download all the certificates according to the image and click on "Done". The "Thing" is sucessfully created!
+Then click on "create thing".<br />
+IMPORTANT: A window will appear instructing you to download the certificates. Download all the certificates according to the image and click on "Done". The "Thing" is sucessfully created!
 
 ![IoT SensorBase][Zertifikate]
 
