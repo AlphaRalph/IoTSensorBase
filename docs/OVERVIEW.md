@@ -114,9 +114,12 @@ Once both connections are established DeviceGateway will start to transfer data.
 ### CloudServices
 @Cloud-Crew: please tell about your work
 
+![IoT SensorBase][CreateNewThing1]
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [Architecture]: images/IoT-SensorBase.png
 [config-image]: images/config.PNG
+[CreateNewThing1]: images/CreateNewThing1.png
