@@ -133,13 +133,17 @@ IMPORTANT: A window will appear instructing you to download the certificates. Do
 
 To enable the connection with the outputcannel from the gateway you need to take the certificates and perform the following steps: 
 
-Device certificate - This file usually ends with ".pem.crt". When you download this it will save as .txt file extension in windows. Save it in your ninary directory as 'bin\certificate.cert.pem' and make sure that it is of file type '.pem', not 'txt' or '.crt'
+**Device certificate<br />**
+This file usually ends with ".pem.crt". When you download this it will save as .txt file extension in windows. Save it in your ninary directory as 'bin\certificate.cert.pem' and make sure that it is of file type '.pem', not 'txt' or '.crt'
 
-Device public key - This file usually ends with ".pem" and is of file type ".key". Save this file as 'bin\certificate.public.key'.
+**Device public key<br />**
+This file usually ends with ".pem" and is of file type ".key". Save this file as 'bin\certificate.public.key'.
 
-Device private key - This file usually ends with ".pem" and is of file type ".key". Save this file as 'bin\certificate.private.key'. Make sure that this file is referred with suffix ".key" in the code while making MQTT connection to AWS IoT.
+**Device private key<br />**
+This file usually ends with ".pem" and is of file type ".key". Save this file as 'bin\certificate.private.key'. Make sure that this file is referred with suffix ".key" in the code while making MQTT connection to AWS IoT.
 
-Root certificate - Save this file to 'bin\AmazonRootCA1.crt'
+**Root certificate<br />**
+Save this file to 'bin\AmazonRootCA1.crt'
 
 Converting Device Certificate from .pem to .pfx
 In order to establish an MQTT connection with the AWS IoT platform, the root CA certificate, the private key of the thing, and the certificate of the thing/device are needed. The .NET cryptographic APIs can understand root CA (.crt), device private key (.key) out-of-the-box. It expects the device certificate to be in the .pfx format, not the .pem format. Hence we need to convert the device certificate from .pem to .pfx.
