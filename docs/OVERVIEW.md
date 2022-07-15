@@ -96,7 +96,7 @@ To read data from Mongo-Db and send to AWS-cloud the configuration could look li
 ![example configuration][config-image]
 
 In order to connect to MQTT-broker you need some certificates.<br />
-Start by creating a 'certificates' folder at 'dotnetsamples\certificates'.
+The certificates has to be located in the binaries folder.
 
 Device certificate<br />
 Device public key <br />
