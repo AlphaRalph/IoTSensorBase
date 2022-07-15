@@ -187,6 +187,10 @@ This leads to the configuration page where the region and API keys must be added
 
 ![IoT SensorBase][PlugIn4]
 
+Since the Frankfurt region was selected for the DynamoDB database, the AWS Region field must contain: eu-central-1
+
+![IoT SensorBase][PlugIn5]
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -202,4 +206,4 @@ This leads to the configuration page where the region and API keys must be added
 [PlugIn2]: images/DataSources2.PNG
 [PlugIn3]: images/ConfigurationPlugin.png
 [PlugIn4]: images/DataSourcesPlugin.png
-
+[PlugIn5]: images/AWSFrankfurt.PNG
