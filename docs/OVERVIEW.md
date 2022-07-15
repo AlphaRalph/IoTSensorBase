@@ -66,7 +66,6 @@ aws CloudWatch<br />
 First, you need to create an account in Amazon AWS Cloud. 
 [https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=header_signup&refid=c25dd0aa-ac63-4039-9735-8633c6c683f6&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation&language=de_de#/start/email]
 
-They way to set up the aws cloud services correctly, you can find here!
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
