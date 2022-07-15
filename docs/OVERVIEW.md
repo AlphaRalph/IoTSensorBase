@@ -146,6 +146,10 @@ In order to establish an MQTT connection with the AWS IoT platform, the root CA 
 
 The easiest way to do this is via an online converter. Like: https://rvssl.com/ssl-converter/ 
 
+If you have followed all the steps correctly and the certificates are correctly placed in the binaries folder, the DeviceGateway should be able to connect to AWS IOT Core.
+
+
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
