@@ -112,7 +112,7 @@ Once both connections are established DeviceGateway will start to transfer data.
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## CloudServices
-First of all make sure tat you have chosen the right region. In our case it is eu-central.
+First of all make sure tat you have chosen the right region. In our case it is eu-central.<br />
 ![IoT SensorBase][PlugIn5]
 
 ### Create a thing
