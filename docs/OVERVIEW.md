@@ -154,8 +154,30 @@ If you have followed all the steps correctly and the certificates are correctly 
 
 ### Create Trace Database
 Next, we create a log database to track and review incoming messages before loading them into the database. This prevents unnecessary or erroneous data in the database. 
-To do this, search "Cloud Watch" - Click on "Log groups" and then click "new log group"
+To do this, search "Cloud Watch" - Click on "Log groups" and then click "new log group". Click on "create"
 
+![IoT SensorBase][CloudWatch]
+
+Now the LogDatebase is created. You can repeat this step to create an Log for errors. Name it "IOTError"
+
+### Create DynamoDB
+
+Now we will create the actual database in which the data will finally be stored. To do this, search for "DynamoDB". Click on "Tabels" and then on "create Table".
+Assign a name for the table. It is important that you enter in the PartationKey field the name "SensorName" with the unit "string" and the SortKey the name "SensorTimestamp" with unit "number". Make sure that there are no spelling mistakes. Also upper and lower case is important. 
+
+![IoT SensorBase][DynamoDB]
+
+Then click on "create table". Now the database is ready to be filled. 
+
+### Connect IOT CORE / Cloud Watch / DynamoDB
+The last step in setting up the aws Cloud is to link the individual services together. This is done via the MQTT Broker (IOT Core). To do this, search for "IOT Core".  Click on "Act" and then on "Rules". To create a rule click on "create". 
+
+![IoT SensorBase][Rule1]
+![IoT SensorBase][Rule3]
+![IoT SensorBase][Rule4]
+![IoT SensorBase][Rule5]
+
+![IoT SensorBase][Rule2]
 
 
 # Visualization 
@@ -217,3 +239,10 @@ Since the Frankfurt region was selected for the DynamoDB database, the AWS Regio
 [PlugIn3]: images/ConfigurationPlugin.png
 [PlugIn4]: images/DataSourcesPlugin.png
 [PlugIn5]: images/AWSFrankfurt.PNG
+[CloudWatch]: images/CloudWatch.PNG
+[DynamoDB]: images/DynamoDB.PNG
+[Rule1]: images/Rule1.PNG
+[Rule2]: images/Rule2.PNG
+[Rule3]: images/Rule3.PNG
+[Rule4]: images/Rule4.PNG
+[Rule5]: images/Rule5.PNG
