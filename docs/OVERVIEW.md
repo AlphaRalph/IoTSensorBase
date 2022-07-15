@@ -198,5 +198,5 @@ This leads to the configuration page, where you can search for the installed plu
 [PlugIn]: images/VerifyPlugin.PNG
 [PlugIn2]: images/DataSources.png
 [PlugIn3]: images/ConfigurationPlugin.png
-[PlugIn32]: images/DataSources2.png
+[PlugIn32]: images/DataSources2.PNG
 
