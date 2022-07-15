@@ -111,8 +111,7 @@ Once both connections are established DeviceGateway will start to transfer data.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## CloudServices
-### Creating a thing/Certificates
+### CloudServices
 We start the process by creating a new Thing. Go to IOT Core. Click on "Manage" and then on "Things". To start the creation click on "Create a new Thing". 
 For the IOTSensorBase we create a "SingleThing".
 
@@ -149,11 +148,30 @@ The easiest way to do this is via an online converter. Like: https://rvssl.com/s
 
 If you have followed all the steps correctly and the certificates are correctly placed in the binaries folder, the DeviceGateway should be able to connect to AWS IOT Core.
 
-### Creating a LogDatabase
+### Visualization 
 
-### Creating DynamoDB
+To visualize the measurement data, the open source platform Grafana is used. 
+Download Grafana from the homepage. If necessary, see also the installation instructions. 
 
-### Creoating IOT-Core Rule / MQTT Broker
+Get Grafana [https://grafana.com/grafana/download?platform=windows]
+	
+Installation guides [https://www.tutorialandexample.com/grafana-tutorial
+	
+The Grafana documentation is available at [https://grafana.com/docs/].
+
+# Plugins 
+Since there is no native support for AWS DynamoDB, a plugin is needed. It is recommended to use grafana-cli for this. 
+[https://github.com/TLV-PMOP/grafana-dynamodb-datasource]
+
+grafana-cli --pluginUrl https://github.com/TLV-PMOP/grafana-dynamodb-datasource/dynamodb-datasource_1.0.0.zip plugins install dynamodb-datasource 
+
+if the use of grafana-cli does not work or is not wanted, the unzipped folder can be saved here '\GrafanaLabs\grafana-8.4.6\data\plugins'
+
+To use this plugin, the following change must be made in custom.ini (see also [https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#allow_loading_unsigned_plugins]): allow_loading_unsigned_plugins = dynamodb-datasource
+
+The Grafana server must be restarted at this point. 
+Verify the plugin was installed.
+
 
 
 
@@ -168,23 +186,4 @@ If you have followed all the steps correctly and the certificates are correctly 
 [policy1]: images/Policy1.PNG
 [Zertifikate]: images/Zertifikate.PNG
 
-
-### Visualization 
-
-To visualize the measurement data, the open source platform Grafana is used. 
-Download Grafana from the homepage. If necessary, see also the installation instructions. 
-
-	Get Grafana [https://grafana.com/grafana/download?platform=windows]
-	
-	Installation guides [https://www.tutorialandexample.com/grafana-tutorial
-	
-The Grafana documentation is available at [https://grafana.com/docs/].
-
-# Plugins 
-Since there is no native support for AWS DynamoDB, a plugin is needed. It is recommended to use grafana-cli for this. 
-[https://github.com/TLV-PMOP/grafana-dynamodb-datasource]
-
-grafana-cli --pluginUrl https://github.com/TLV-PMOP/grafana-dynamodb-datasource/dynamodb-datasource_1.0.0.zip plugins install dynamodb-datasource 
-
-if the use of grafana-cli does not work or is not wanted, the unzipped folder can be saved here '\GrafanaLabs\grafana-8.4.6\data\plugins'
 
