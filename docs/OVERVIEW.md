@@ -122,4 +122,4 @@ Once both connections are established DeviceGateway will start to transfer data.
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [Architecture]: images/IoT-SensorBase.png
 [config-image]: images/config.PNG
-[CreateNewThing1]: images/CreateNewThing1.png
+[CreateNewThing1]: images/CreateNewThing1.PNG
