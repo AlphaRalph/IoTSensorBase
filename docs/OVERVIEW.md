@@ -148,7 +148,7 @@ The easiest way to do this is via an online converter. Like: https://rvssl.com/s
 
 If you have followed all the steps correctly and the certificates are correctly placed in the binaries folder, the DeviceGateway should be able to connect to AWS IOT Core.
 
-### Visualization 
+# Visualization 
 
 To visualize the measurement data, the open source platform Grafana is used. 
 Download Grafana from the homepage. If necessary, see also the installation instructions. 
@@ -159,7 +159,7 @@ Installation guides [https://www.tutorialandexample.com/grafana-tutorial
 	
 The Grafana documentation is available at [https://grafana.com/docs/].
 
-# Plugins 
+### Plugins 
 Since there is no native support for AWS DynamoDB, a plugin is needed. It is recommended to use grafana-cli for this. 
 [https://github.com/TLV-PMOP/grafana-dynamodb-datasource]
 
@@ -173,6 +173,8 @@ The Grafana server must be restarted at this point.
 Verify the plugin was installed.
 
 ![IoT SensorBase][PlugIn]
+
+To check if the installation was done correctly, you have to log in to your Grafana account and click on Configuration Settings -> Data Sources 
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
