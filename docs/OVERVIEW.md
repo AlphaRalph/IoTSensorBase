@@ -111,7 +111,8 @@ Once both connections are established DeviceGateway will start to transfer data.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-### CloudServices
+## CloudServices
+### Creating a thing/Certificates
 We start the process by creating a new Thing. Go to IOT Core. Click on "Manage" and then on "Things". To start the creation click on "Create a new Thing". 
 For the IOTSensorBase we create a "SingleThing".
 
@@ -148,6 +149,11 @@ The easiest way to do this is via an online converter. Like: https://rvssl.com/s
 
 If you have followed all the steps correctly and the certificates are correctly placed in the binaries folder, the DeviceGateway should be able to connect to AWS IOT Core.
 
+### Creating a LogDatabase
+
+### Creating DynamoDB
+
+### Creoating IOT-Core Rule / MQTT Broker
 
 
 
