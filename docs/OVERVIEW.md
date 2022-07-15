@@ -25,7 +25,7 @@
 <!-- Getting Started Guide - Overview -->
 ## Getting Started Guide - Overview
 
-Getting started will walk you through the process to setup Sensors, a Devicegateway, IoT communication and Visualisation.
+Getting started will walk you through the process to setup Sensors, a Devicegateway, IoT communication and Visualization.
 
 To get an idea about the architecture of this project have a look at the following picture.
 
@@ -58,12 +58,12 @@ To run the C# .NET Code built on Visual Studio 2017 we used MONO:
    ```sh
    sudo apt install mono-complete
    ```
-To run the IOT sensor base, we rely on AWS cloud services. Specifically, the following services are required to build the IOT Sensor Base: <br />
+To run the IOT sensor base, we rely on AWS cloud services. Specifically, the following services are required to build the IOT Sensor Base: 
 aws IOT-CORE<br />
 aws DynamoDB<br />
 aws CloudWatch<br />
 
-First, you need to create an account in Amazon AWS Cloud.<br /> 
+First, you need to create an account in Amazon AWS Cloud. 
 [https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=header_signup&refid=c25dd0aa-ac63-4039-9735-8633c6c683f6&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation&language=de_de#/start/email]
 
 
@@ -98,12 +98,12 @@ To read data from Mongo-Db and send to AWS-cloud the configuration could look li
 In order to connect to MQTT-broker you need some certificates.<br />
 The certificates has to be located in the binaries folder.
 
-**- Device certificate<br />**
-**- Device public key <br />**
-**- Device private key <br />**
-**- Root certificate <br />**
+Device certificate<br />
+Device public key <br />
+Device private key <br />
+Root certificate <br />
 
-You get this certificates by creating a new "THING" in AWS. Look below on "CloudServices" for futher details.
+You get this certificates by creating a new "THING" in AWS. Look here for the detail walkthrough.
 
 @Andrej: could you add some information how to start the DeviceGateway.exe on raspberry.
 
@@ -133,17 +133,13 @@ IMPORTANT: A window will appear instructing you to download the certificates. Do
 
 To enable the connection with the outputcannel from the gateway you need to take the certificates and perform the following steps: 
 
-**Device certificate<br />**
-This file usually ends with ".pem.crt". When you download this it will save as .txt file extension in windows. Save it in your ninary directory as 'bin\certificate.cert.pem' and make sure that it is of file type '.pem', not 'txt' or '.crt'
+Device certificate - This file usually ends with ".pem.crt". When you download this it will save as .txt file extension in windows. Save it in your ninary directory as 'bin\certificate.cert.pem' and make sure that it is of file type '.pem', not 'txt' or '.crt'
 
-**Device public key<br />**
-This file usually ends with ".pem" and is of file type ".key". Save this file as 'bin\certificate.public.key'.
+Device public key - This file usually ends with ".pem" and is of file type ".key". Save this file as 'bin\certificate.public.key'.
 
-**Device private key<br />**
-This file usually ends with ".pem" and is of file type ".key". Save this file as 'bin\certificate.private.key'. Make sure that this file is referred with suffix ".key" in the code while making MQTT connection to AWS IoT.
+Device private key - This file usually ends with ".pem" and is of file type ".key". Save this file as 'bin\certificate.private.key'. Make sure that this file is referred with suffix ".key" in the code while making MQTT connection to AWS IoT.
 
-**Root certificate<br />**
-Save this file to 'bin\AmazonRootCA1.crt'
+Root certificate - Save this file to 'bin\AmazonRootCA1.crt'
 
 Converting Device Certificate from .pem to .pfx
 In order to establish an MQTT connection with the AWS IoT platform, the root CA certificate, the private key of the thing, and the certificate of the thing/device are needed. The .NET cryptographic APIs can understand root CA (.crt), device private key (.key) out-of-the-box. It expects the device certificate to be in the .pfx format, not the .pem format. Hence we need to convert the device certificate from .pem to .pfx.
@@ -172,11 +168,17 @@ If you have followed all the steps correctly and the certificates are correctly 
 To visualize the measurement data, the open source platform Grafana is used. 
 Download Grafana from the homepage. If necessary, see also the installation instructions. 
 
-	- Get Grafana
-	[https://grafana.com/grafana/download?platform=windows]
+	Get Grafana [https://grafana.com/grafana/download?platform=windows]
 	
-	- Installation guides
-	[https://www.tutorialandexample.com/grafana-tutorial
+	Installation guides [https://www.tutorialandexample.com/grafana-tutorial
 	
-The Grafana documentation is available at grafana.com/docs.
+The Grafana documentation is available at [https://grafana.com/docs/].
+
+# Plugins 
+Since there is no native support for AWS DynamoDB, a plugin is needed. It is recommended to use grafana-cli for this. 
+[https://github.com/TLV-PMOP/grafana-dynamodb-datasource]
+
+grafana-cli --pluginUrl https://github.com/TLV-PMOP/grafana-dynamodb-datasource/dynamodb-datasource_1.0.0.zip plugins install dynamodb-datasource 
+
+if the use of grafana-cli does not work or is not wanted, the unzipped folder can be saved here '\GrafanaLabs\grafana-8.4.6\data\plugins'
 
