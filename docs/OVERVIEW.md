@@ -103,7 +103,7 @@ Device public key <br />
 Device private key <br />
 Root certificate <br />
 
-You get this certificates by creating a new "THING" in AWS. Look here for the detail walkthrough.
+You get this certificates by creating a new "THING" in AWS. Look below on "CloudServices" for futher details.
 
 @Andrej: could you add some information how to start the DeviceGateway.exe on raspberry.
 
