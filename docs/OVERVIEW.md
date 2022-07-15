@@ -183,7 +183,7 @@ Next, select "add new Action" from "Actions". Click on "Send message data to Clo
 For logging errors, you can either use Cloudwatch from before, or if you have created a standalone Cloudwatch, you can use this.
 ![IoT SensorBase][Rule4]
 
-Now it would be a great time for testing. Send Data from your client and check in the CloudWatch if Data arrive. 
+Now it would be a great time for testing. Send Data from your client and check in the CloudWatch if Data arrive. <br /><br />
 Last but not least we have to connect or DynamoDB to the MQTTClient. Click on "add Action" and then on "Split message into multiple columns of a DynamoDB table (DynamoDBv2)" choose the DynamoDB we created in the list. 
 ![IoT SensorBase][Rule2]
 
