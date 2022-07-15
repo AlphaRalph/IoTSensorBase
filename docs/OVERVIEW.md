@@ -146,7 +146,7 @@ In order to establish an MQTT connection with the AWS IoT platform, the root CA 
 
 The easiest way to do this is via an online converter. Like: https://rvssl.com/ssl-converter/ 
 
-If you have followed all the steps correctly and the certificates are correctly placed in the binaries folder, the DeviceGateway should be able to connect to AWS IOT Core.
+If you have followed all the steps correctly and the certificates are correctly placed in the binaries folder, the DeviceGateway should be able to connect to AWS IOT Core.x
 
 # Visualization 
 
@@ -176,7 +176,6 @@ Verify the plugin was installed.
 
 To check if the installation was done correctly, you have to log in to your Grafana account and click on Configuration Settings -> Data Sources 
 
-jfjfj
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
