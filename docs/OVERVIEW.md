@@ -59,9 +59,9 @@ To run the C# .NET Code built on Visual Studio 2017 we used MONO:
    sudo apt install mono-complete
    ```
 To run the IOT sensor base, we rely on AWS cloud services. Specifically, the following services are required to build the IOT Sensor Base: 
-aws IOT-CORE,
-aws DynamoDB,
-aws CloudWatch
+aws IOT-CORE<br />
+aws DynamoDB<br />
+aws CloudWatch<br />
 
 First, you need to create an account in Amazon AWS Cloud. 
 [https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=header_signup&refid=c25dd0aa-ac63-4039-9735-8633c6c683f6&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation&language=de_de#/start/email]
@@ -97,7 +97,14 @@ To read data from Mongo-Db and send to AWS-cloud the configuration could look li
 ![example configuration][config-image]
 
 In order to connect to MQTT-broker you need some certificates.<br />
-@Thomas: please add some information how to get these files.
+Start by creating a 'certificates' folder at 'dotnetsamples\certificates'.
+
+Device certificate<br />
+Device public key <br />
+Device private key <br />
+Root certificate <br />
+
+You get this certificates by creating a new "THING" in AWS. Look here for the detail walkthrough.
 
 @Andrej: could you add some information how to start the DeviceGateway.exe on raspberry.
 
