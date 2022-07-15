@@ -172,7 +172,7 @@ To use this plugin, the following change must be made in custom.ini (see also [h
 The Grafana server must be restarted at this point. 
 Verify the plugin was installed.
 
-
+![IoT SensorBase][PlugIn]
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -185,5 +185,5 @@ Verify the plugin was installed.
 [CreateNewThing2]: images/CreateNewThing2.PNG
 [policy1]: images/Policy1.PNG
 [Zertifikate]: images/Zertifikate.PNG
-
+[PlugIn]: images/VerifyPlugin.PNG
 
