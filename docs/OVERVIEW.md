@@ -112,9 +112,24 @@ Once both connections are established DeviceGateway will start to transfer data.
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### CloudServices
-@Cloud-Crew: please tell about your work
+We start the process by creating a new Thing. Go to IOT Core. Click on "Manage" and then on "Things". To start the creation click on "Create a new Thing". 
+For the IOTSensorBase we create a "SingleThing".
 
 ![IoT SensorBase][CreateNewThing1]
+
+Type in a name of the "Thing" and click on "next". We don't need to set up the additional settings and don't need an device shadow. 
+
+![IoT SensorBase][CreateNewThing2]
+
+To get the right certificates please click "Auto-generate a new certificte (recommended)"
+Then create a new policy like the following sample and attach it to the "Thing". This policy allows each device to do everything. If you want restrictions, specify this in the policy. 
+
+![IoT SensorBase][policy1]
+
+Then click on "create thing". IMPORTANT: A window will appear instructing you to download the certificates. Download all the certificates according to the image and click on "Done". The "Thing" is sucessfully created!
+
+![IoT SensorBase][Zertifikate]
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -123,3 +138,6 @@ Once both connections are established DeviceGateway will start to transfer data.
 [Architecture]: images/IoT-SensorBase.png
 [config-image]: images/config.PNG
 [CreateNewThing1]: images/CreateNewThing1.PNG
+[CreateNewThing2]: images/CreateNewThing2.PNG
+[policy1]: images/policy1.png
+[Zertifikate]:images/Zertifikate.png
