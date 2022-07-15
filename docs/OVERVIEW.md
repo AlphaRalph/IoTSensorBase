@@ -194,6 +194,6 @@ This leads to the configuration page, where you can search for the installed plu
 [policy1]: images/Policy1.PNG
 [Zertifikate]: images/Zertifikate.PNG
 [PlugIn]: images/VerifyPlugin.PNG
-[PlugIn2]: images/DataSources.PNG
-[PlugIn3]: images/Configuration.PNG
+[PlugIn2]: images/DataSources.png
+[PlugIn3]: images/ConfigurationPlugin.png
 
