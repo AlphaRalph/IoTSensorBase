@@ -89,25 +89,12 @@ The first three numbers are the numbers of the standard gateway and the last num
 ```sh
 sudo reboot
 ```
-
-MongoDB 5.0 under Raspberry Pi OS (64-bit) 
-[https://andyfelong.com/2021/08/mongodb-4-4-under-raspberry-pi-os-64-bit-raspbian64/]
-
-To run the C# .NET Code built on Visual Studio 2017 we used MONO:
-   ```sh
-   sudo apt install mono-complete
-   ```
-To run the IOT sensor base, we rely on AWS cloud services. Specifically, the following services are required to build the IOT Sensor Base: 
-aws IOT-CORE<br />
-aws DynamoDB<br />
-aws CloudWatch<br />
-
-First, you need to create an account in Amazon AWS Cloud. 
-[https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=header_signup&refid=c25dd0aa-ac63-4039-9735-8633c6c683f6&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation&language=de_de#/start/email]
-
+If you let the Raspberry Pi boot up in peace, you can log in again via the Windows Power Shell in the next step. This time, however, the static IP address is used again, with which the Raspberry Pi can now be addressed in the home network. The credentials are the default values and are pi as username and raspberry as password. After that you are successfully connected to the Raspberry Pi.
+```sh
+ssh pi@192.168.0.101
+```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 ## InstallSensors
 
