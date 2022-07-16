@@ -4,11 +4,11 @@
 
 # Details AWS Cloud Services
 
-![IoT SensorBase][ÜbersichtAWS]
+![IoT SensorBase][UbersichtAWS]
 
 
 
 
-[ÜbersichtAWS]: images\ÜbersichtAWS.PNG
+[UbersichtAWS]: images\UbersichtAWS.PNG
 
 
