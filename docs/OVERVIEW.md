@@ -200,8 +200,11 @@ Download Grafana from the homepage. If necessary, see also the installation inst
 Get Grafana [https://grafana.com/grafana/download?platform=windows]
 	
 Installation guides [https://www.tutorialandexample.com/grafana-tutorial
-	
-The Grafana documentation is available at [https://grafana.com/docs/].
+
+When trying to start grafana-server.exe make sure you allow the file as trusted.
+To do this, open the file properties by right-clicking the file in Windows Explorer and selecting 'Properties'. On the 'General' tab of the dialog that appears, you will find a note about security in the last section. Click on the adjacent 'Allow' button.
+
+The Grafana documentation is available at [https://grafana.com/docs/]
 
 ### Plugins 
 Since there is no native support for AWS DynamoDB, a plugin is needed. It is recommended to use grafana-cli for this. 
@@ -209,7 +212,11 @@ Since there is no native support for AWS DynamoDB, a plugin is needed. It is rec
 
 grafana-cli --pluginUrl https://github.com/TLV-PMOP/grafana-dynamodb-datasource/dynamodb-datasource_1.0.0.zip plugins install dynamodb-datasource 
 
-if the use of grafana-cli does not work or is not wanted, the unzipped folder can be saved here '\GrafanaLabs\grafana-8.4.6\data\plugins'
+If the use of grafana-cli does not work or is not wanted, the unzipped folder can be saved here '\GrafanaLabs\grafana-8.4.6\data\plugins'
+
+To download the pluigin, click on 'Code', then 'Download ZIP'
+
+![IoT SensorBase][PlugIn1]
 
 To use this plugin, the following change must be made in custom.ini (see also [https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#allow_loading_unsigned_plugins]): allow_loading_unsigned_plugins = dynamodb-datasource
 
@@ -247,6 +254,7 @@ Since the Frankfurt region was selected for the DynamoDB database, the AWS Regio
 [policy1]: images/Policy1.PNG
 [Zertifikate]: images/Zertifikate.PNG
 [PlugIn]: images/VerifyPlugin.PNG
+[PlugIn1]: images/DownloadPlugin.PNG
 [PlugIn2]: images/DataSources2.PNG
 [PlugIn3]: images/ConfigurationPlugin.png
 [PlugIn4]: images/DataSourcesPlugin.png
