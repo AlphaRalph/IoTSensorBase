@@ -9,6 +9,6 @@
 
 
 
-[UbersichtAWS]: images\UbersichtAWS.PNG
+[UbersichtAWS]: images/UbersichtAWS.PNG
 
 
