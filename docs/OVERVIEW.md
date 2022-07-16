@@ -468,4 +468,8 @@ To display the values of the table, the fields must be filled in:
 [Rule4]: images/Rule4.PNG
 [Rule5]: images/Rule5.PNG
 [DHT22]: images/DHT22.png
+<<<<<<< HEAD
 [MHZ19]: images/MHZ19.jpg
+=======
+[MHZ19]: images/MHZ19.jpg
+>>>>>>> b10f900ccd549ce170b1423929656220d9dd3ce4
