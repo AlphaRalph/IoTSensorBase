@@ -219,7 +219,7 @@ To download the pluigin, click on 'Code', then 'Download ZIP'
 
 You have to move the folder 'src' from the main folder 'grafana-dynamodb-datasource-master' into the folder 'dist'. After that move the files 'module' and 'module.js.map' from the folder 'dist' into the folder 'src'.
 
-It should now look like this: 
+XXX\grafana\data\plugins\grafana-dynamodb-datasource-master\dist\src should now look like this: 
 
 ![IoT SensorBase][PlugIn7]
 
@@ -236,19 +236,21 @@ To check if the installation was done correctly, you have to log in to your Graf
 
 ![IoT SensorBase][PlugIn2]
 
-This leads to the configuration page, where you can search for the installed plugin in the plugins teb. 
+This leads to the configuration page, where you can search for the installed plugin in the plugins tab. 
 
 ![IoT SensorBase][PlugIn3]
 
-To add this datasource, under configuration page -> Data sources, the button Add Data source must be pressed and the added plugin must be selected. 
+To add this datasource, under configuration page -> Data sources, klick the button 'Add Data source' and select the added plugin. 
 This leads to the configuration page where the region and API keys must be added: 
 
 ![IoT SensorBase][PlugIn4]
 
-Since the Frankfurt region was selected for the DynamoDB database, the AWS Region field must contain: eu-central-1
+Since the Frankfurt region was selected for the DynamoDB database, the AWS Region field must contain: eu-central-1. 
+You can find your personal private key and AccessKey ID in your AWS account. 
 
 ![IoT SensorBase][PlugIn5]
 
+Klick on 'Save and test'. You can now start with the visualization. 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
