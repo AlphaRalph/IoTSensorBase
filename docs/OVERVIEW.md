@@ -267,7 +267,7 @@ Since the Frankfurt region was selected for the DynamoDB database, the AWS Regio
 [PlugIn4]: images/DataSourcesPlugin.png
 [PlugIn5]: images/AWSFrankfurt.PNG
 [PlugIn6]: images/AllowUnsignedPlugins.PNG
-[PlugIn6]: images/srcfolder.PNG
+[PlugIn7]: images/srcfolder.PNG
 [CloudWatch]: images/CloudWatch.PNG
 [DynamoDB]: images/DynamoDB.PNG
 [Rule1]: images/Rule1.PNG
