@@ -44,8 +44,6 @@ The database is designed to accommodate all data regardless of sensor type. In t
 
 In this solution, the data is not only written to a database, but the MQTT broker also sends the data to the CloudWatch at the same time to monitor all sent data at the beginning to avoid erroneous data in the cloud. Do not forget to disable sending all data to the CloudWatch (high cost).
 
-Translated with www.DeepL.com/Translator (free version)
-
 Find more information <a href="CLOUDSTORAGE_OV.md">here</a>.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
