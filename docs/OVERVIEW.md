@@ -4,22 +4,16 @@
 
 <!-- TABLE OF CONTENTS -->
 <details>
-  <summary>Table of Contents</summary>
-  <ol>    
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-	    <li><a href="#Hardware Selection">Selection of suitable hardware</a></li>
-        <li><a href="#Prerequisites">Prerequisites</a></li>
-        <li><a href="#Prerequisites">Prerequisites</a></li>
-		<li><a href="#Install Sensors">Install Sensors</a></li>
-		<li><a href="#MicroServices">Communication between MicroServices with Sensors</a></li>
-		<li><a href="#MongoDB">Setup MongoDB</a></li>
-		<li><a href="#DeviceGateway">Configuration of DeviceGateway</a></li>
-		<li><a href="#CloudServices">Configuration of AWS-cloud services</a></li>
-      </ul>
-    </li>
-  </ol>
+<summary>Table of Contents</summary>   
+<li><a href="#Getting Started Guide - Overview">Overview</a></li>
+<li><a href="#Hardware Selection">Hardware Selection</a></li>
+<li><a href="#Prerequisites">Prerequisites</a></li>
+<li><a href="#Install Sensors">Install Sensors</a></li>
+<li><a href="#Micro Services">Micro Services</a></li>
+<li><a href="#MongoDB">MongoDB</a></li>
+<li><a href="#Device Gateway">Device Gateway</a></li>
+<li><a href="#Cloud Services">Cloud Services</a></li>
+<li><a href="#Visualization">Visualization</a></li>
 </details>
 
 
@@ -33,7 +27,7 @@ To get an idea about the architecture of this project have a look at the followi
 ![IoT SensorBase][Architecture]
 
 Python is used to connect to various sensors and gather data.<br />
-Sensor data is stored in a Mongo-DB.<br />
+Sensor data is stored in a locally installed MongoDB.<br />
 
 A device gateway was created in C# to connect to various inbound channels.<br />
 In a first step only a MongoDbInboundChannes was created.<br />
@@ -73,7 +67,7 @@ sudo apt-get upgrade
 ```
 
 ### Network Settings
-To avoid the need for a network cable every time you connect, we assign the Raspberry Pi a static IP address, which you can use to address the Raspberry Pi wirelessly on your home network. If you execute the ipconfig command on the Windows computer in another terminal, the default gateway of the wireless LAN adapter is output, where the trailing sequence of numbers is interesting (in this case it was 192.168.0.1). To do this, execute the following command in the terminal:
+To avoid the need for a network cable every time you connect, we assign the Raspberry Pi a static IP address, which you can use to address the Raspberry Pi wirelessly on your home network. If you execute the `ipconfig` command on the Windows computer in another terminal, the default gateway of the wireless LAN adapter is output, where the trailing sequence of numbers is interesting (in this case it was 192.168.0.1). To do this, execute the following command in the terminal:
 ```sh
 sudo nano /etc/dhcpcd.conf
 ```
@@ -96,23 +90,76 @@ ssh pi@192.168.0.101
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## InstallSensors
+## Install Sensors
+In the project, three different characteristic values are recorded via two sensors and written to the local database. A temperature sensor, which records the values for temperature and humidity, and a CO2 sensor, which records the current CO2 content in the air, provide values that form the basis for the subsequent visualization.
 
-@Andrej: please tell about your experience about installation of sensors
+### Temperature and Humidity Sensor
+For temperature measurement and humidity measurement, the DHT22 sensor is used, which on the one hand provides accurate values and on the other hand can be purchased very cheaply. A german [manual](https://tutorials-raspberrypi.de/raspberry-pi-luftfeuchtigkeit-temperatur-messen-dht11-dht22/) was used as a basis for the use, which describes the setup and the further individual steps very precisely and in detail.
+
+#### Required Components
+* Temperature and humidity sensor [DHT22](https://www.reichelt.at/at/de/entwicklerboards-temperatur-feuchtigkeitssensor-dht22-debo-dht-22-p224218.html?PROVID=2807&gclid=CjwKCAjww8mWBhABEiwAl6-2ReQO3vYPiNHrR649THn-6HLbpCPvgqA7vQPz0gEjFMpD8jH_2U874xoC2z0QAvD_BwE)
+* 10k resistor
+* Breadboard and jumper cables
+
+#### Layout
+![IoT SensorBase/images][DHT22]
+
+#### Software
+To use the sensor properly, some packages must be installed first:
+```sh
+sudo apt-get update
+sudo apt-get install build-essential python-dev-is-python2 git
+```
+Then the library of sensors can be loaded:
+```sh
+sudo pip3 install adafruit-circuitpython-dht
+sudo apt-get install libgpiod2
+```
+All necessary software is thus installed for the sensor.
+
+### CO2 Sensor
+The CO2 sensor is many times more expensive than the DHT22, but on the one hand it can be used to determine the CO2 content in the air and on the other hand it is relatively easy to connect to the Raspberry Pi and read out the individual sensor data. Furthermore, other values such as temperature are also recorded by this sensor, but only the CO2 value is taken into account in this project. A german [manual](https://tutorials-raspberrypi.de/raspberry-pi-co2-sensor-mh-z19-tutorial/) was used as a basis for the use, which describes the setup and the further individual steps very precisely and in detail.
+
+#### Definition CO2 Concentration
+In order to be able to interpret the values of the CO2 concentration correctly, the following table shows the individual definitions of the respective concentrations.
+air quality | CO2 in ppm
+----------  | ----------
+high | <800
+medium | 800-1000
+moderate  | 1000-1400
+low | >1400
+#### Required Components
+* CO2 sensor [MH-Z19C](https://www.reichelt.de/de/de/infrarot-co2-sensor-mh-z19c-pinleiste-rm-2-54-co2-mh-z19c-ph-p297320.html?r=1&gclid=CjwKCAjww8mWBhABEiwAl6-2RW_JbI0Y-NaGWL5Y9Eb1-wMTT53rWzYfBefaIPCa8fqqE1RBcy8AtxoCa7YQAvD_BwE)
+* Breadboard and jumper cables
+#### Layout
+![IoT SensorBase/images][MHZ19]
+
+#### Software
+To use the sensor properly, some packages must be installed first:
+```sh
+git clone https://github.com/UedaTakeyuki/mh-z19
+cd mh-z19
+```
+On the one hand, this clones a project from GitHub to the Raspberry Pi, and on the other hand, it changes to `mh-z19` in the Raspberry Pi's directory. Afterwards, we now run the setup script that installs and enables the necessary packages.
+```sh
+./setup.sh
+```
+All necessary software is thus installed for the sensor.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## MicroServices
+## Micro Services
+For the communication between Raspberry Pi and the respective sensors, small own programs were developed, which communicate independently with the sensors and thus record data.
 
-@Andrej: please tell about your experience about communication with sensors
+### 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## MongoDB
-
+The choice between SQL or noSQL database was made in favor of the noSQL database, because the individual data have no relevant connection to each other and thus the core idea of an SQL database (dependency between individual data) is not fulfilled.
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## DeviceGateway
+## Device Gateway
 
 You will find a config.xml in your binaries folder.<br />
 
@@ -219,7 +266,7 @@ At the end it should look like this:
 
 The aws Cloudservice is now set up!!
 
-# Visualization 
+## Visualization 
 
 To visualize the measurement data, the open source platform Grafana is used. 
 Download Grafana from the homepage. If necessary, see also the installation instructions. 
@@ -317,3 +364,5 @@ To display the values of the table, the fields must be filled in:
 [Rule3]: images/Rule3.PNG
 [Rule4]: images/Rule4.PNG
 [Rule5]: images/Rule5.PNG
+[DHT22]: images/DHT22.png
+[MHZ19]: images/MHZ19.jpg
