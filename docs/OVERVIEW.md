@@ -79,7 +79,7 @@ static routers=192.168.0.1
 static domain_name_servers=8.8.4.4 8.8.8.8
 static domain_search=
 ```
-The first three numbers are the numbers of the standard gateway and the last number determines a single participant. The Raspberry Pi can now be addressed with the number 101 in the home network. The other numbers will not be discussed further here, since they are not relevant for the actual project. With `CTRL+O`, `Enter` and `CTRL+X` you exit the editor and end up in the terminal again. The Raspberry Pi has now been assigned a static IP address, which can now be used for communication. To activate the settings, you have to restart the Raspberry Pi, but the network cable must be removed immediately after the reboot, otherwise there will be complications with the selection of the standard gateway.
+The first three numbers are the numbers of the standard gateway and the last number determines a single participant. The Raspberry Pi can now be addressed with the number 101 in the home network. The other numbers will not be discussed further here, since they are not relevant for the actual project. With `CTRL+O`, `Enter` and `CTRL+X` you save and exit the editor and end up in the terminal again. The Raspberry Pi has now been assigned a static IP address, which can now be used for communication. To activate the settings, you have to restart the Raspberry Pi, but the network cable must be removed immediately after the reboot, otherwise there will be complications with the selection of the standard gateway.
 ```sh
 sudo reboot
 ```
@@ -87,6 +87,19 @@ If you let the Raspberry Pi boot up in peace, you can log in again via the Windo
 ```sh
 ssh pi@192.168.0.101
 ```
+
+### Other Stuff
+For the execution of the device gateway on the Raspberry Pi a utility is necessary, because `.exe` cannot be executed natively by the Raspberry Pi. Thus, the code written in C# can be executed on the Raspberry Pi.
+```sh
+sudo apt install mono-complete
+```
+
+To run the IoT sensor base, we rely on AWS cloud services. Specifically, the following services are required to build the IoT sensor base: 
+*aws IOT-CORE
+*aws DynamoDB
+*aws CloudWatch
+
+In addition an [account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=header_signup&refid=c25dd0aa-ac63-4039-9735-8633c6c683f6&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation&language=de_de#/start/email) in AWS cloud must be created. 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -110,7 +123,7 @@ To use the sensor properly, some packages must be installed first:
 sudo apt-get update
 sudo apt-get install build-essential python-dev-is-python2 git
 ```
-Then the library of sensors can be loaded:
+Now the library for the sensors can be loaded. Here a prefabricated library from Adafruit, which supports different sensors, is used:
 ```sh
 sudo pip3 install adafruit-circuitpython-dht
 sudo apt-get install libgpiod2
@@ -149,43 +162,133 @@ All necessary software is thus installed for the sensor.
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Micro Services
-For the communication between Raspberry Pi and the respective sensors, small own programs were developed, which communicate independently with the sensors and thus record data.
+For the communication between Raspberry Pi and the respective sensors, small own programs were developed, which communicate independently with the sensors and thus record data. The programs are primarily used to test the functionality of the individual sensors. Nevertheless, individual components of the programs are subsequently used for the actual project. The advantage of micro services is that, regardless of the number of sensors, only small building blocks need to be generated again and again, which are then implemented back into the overall system.
 
-### 
+### Temperature and Humidity Sensor
+To check the functionality, a new program must first be created. The editor `nano` is used for this and the file extension `.py` indicates that it is a program in Python.
+```sh
+sudo nano dht_example.py
+```
+```python
+import time
+import board
+import adafruit_dht
+ 
+# Initial the dht device, with data pin connected to:
+# dhtDevice = adafruit_dht.DHT22(board.D4)
+ 
+# you can pass DHT22 use_pulseio=False if you wouldn't like to use pulseio.
+# This may be necessary on a Linux single board computer like the Raspberry Pi,
+# but it will not work in CircuitPython.
+dhtDevice = adafruit_dht.DHT22(board.D4, use_pulseio=False)
+ 
+while True:
+    try:
+        # Print the values to the serial port
+        temperature_c = dhtDevice.temperature
+        humidity = dhtDevice.humidity
+        print(
+            "Temp: {:.1f} C    Humidity: {}% ".format(
+                temperature_c, humidity
+            )
+        )
+ 
+    except RuntimeError as error:
+        # Errors happen fairly often, DHT's are hard to read, just keep going
+        print(error.args[0])
+        time.sleep(2.0) # Maximum reading time DHT22
+        continue
+    except Exception as error:
+        dhtDevice.exit()
+        raise error
+ 
+    time.sleep(2.0) # Maximum reading time DHT22
+```
+With `CTRL+O`, `Enter` and `CTRL+X` you save and exit the editor and end up in the terminal again. To start the program, the following is executed in the terminal:
+```sh
+sudo python dht_example.py
+```
+The values for temperature and humidity are now displayed in the terminal and read out cyclically. If you want to end the current process, you can do this with the key combination `CTRL+C`.
+
+### CO2 Sensor
+To check the functionality, a new program must first be created. The editor `nano` is used for this and the file extension `.py` indicates that it is a program in Python.
+```sh
+sudo nano mhz19_example.py
+```
+```python
+import time
+import mh_z19
+
+while True:
+  print(mh_z19.readall())
+  time.sleep(2.0)
+```
+With `CTRL+O`, `Enter` and `CTRL+X` you save and exit the editor and end up in the terminal again. To start the program, the following is executed in the terminal:
+```sh
+sudo python mhz19_example.py
+```
+The values for CO2 concentration and other stuff are now displayed in the terminal and read out cyclically. If you want to end the current process, you can do this with the key combination `CTRL+C`.
+
+The value of the CO2 content can alternatively be read out via the ready-made Python program, which comes from the manufacturer. Thereby one uses
+```sh
+sudo python -m mh_z19
+```
+The rest of the procedure is identical to the other two measurements.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## MongoDB
-The choice between SQL or noSQL database was made in favor of the noSQL database, because the individual data have no relevant connection to each other and thus the core idea of an SQL database (dependency between individual data) is not fulfilled.
+The choice between SQL or noSQL database was made in favor of the noSQL database, because the individual data have no relevant connection to each other and thus the core idea of an SQL database (dependency between individual data) is not fulfilled. For the installation of MongoDB, we used Andy Felong's [instructions](https://andyfelong.com/2021/08/mongodb-4-4-under-raspberry-pi-os-64-bit-raspbian64/), which are very detailed and accurate. Therefore, the topic will not be discussed further here.
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Device Gateway
 
 You will find a config.xml in your binaries folder.<br />
 
-Devicegateway needs at least one inbound and one outbound channel to run.<br />
-To read data from Mongo-Db and send to AWS-cloud the configuration could look like this:<br />
+Device gateway needs at least one inbound and one outbound channel to run.<br />
+To read data from MongoDB and send to AWS cloud the configuration could look like this:<br />
 
 ![example configuration][config-image]
 
-In order to connect to MQTT-broker you need some certificates.<br />
+In order to connect to MQTT broker you need some certificates.<br />
 The certificates has to be located in the binaries folder.
 
-Device certificate<br />
-Device public key <br />
-Device private key <br />
-Root certificate <br />
+* Device certificate
+* Device public key 
+* Device private key
+* Root certificate 
 
 You get this certificates by creating a new "THING" in AWS. Look here for the detail walkthrough.
 
-@Andrej: could you add some information how to start the DeviceGateway.exe on raspberry.
-
-Once both connections are established DeviceGateway will start to transfer data.
+To use the device gateway on the Raspberry Pi, it must first be copied to the Raspberry Pi. The easiest way to do this is to use a graphical utility like `WinSCP`, because the data can be moved by drag and drop. Afterwards the folder has to be unpacked on the Raspberry Pi.
+```sh
+unzip DeviceGateway.zip
+cd DeviceGateway/
+```
+Next, the serial number of the Raspberry Pi should be stored in `config.xml` so that it is also clear which participant is communicating with the cloud. Thus, the file must be opened first.
+```sh
+sudo nano config.xml
+```
+You can get the serial number with the following command in the terminal:
+```sh
+cat /proc/cpuinfo | grep Serial | cut -d' ' -f2
+```
+The serial number (xx) must now be inserted in the following line:
+```csharp
+<DWGName>device/xx/data</DWGName>
+```
+With `CTRL+O`, `Enter` and `CTRL+X` you save and exit the editor and end up in the terminal again.
+The gateway can now be started via mono:
+```sh
+sudo mono DeviceGateway.exe
+```
+Once both connections are established the device gateway will start to transfer data.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## CloudServices
-First of all make sure tat you have chosen the right region. In our case it is eu-central.<br />
+First of all make sure that you have chosen the right region. In our case it is eu-central.<br />
 ![IoT SensorBase][PlugIn5]
 
 ### Create a thing
