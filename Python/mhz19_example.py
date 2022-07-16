@@ -1,3 +1,4 @@
+import time
 import mh_z19
 
 while True:
