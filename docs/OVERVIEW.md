@@ -246,7 +246,7 @@ This leads to the configuration page where the region and API keys must be added
 ![IoT SensorBase][PlugIn4]
 
 Since the Frankfurt region was selected for the DynamoDB database, the AWS Region field must contain: eu-central-1. 
-You can find your personal private key and AccessKey ID in your AWS account. 
+You can find your personal private key and AccessKey ID in your AWS account. [https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SettingUp.DynamoWebService.html]
 
 Click on 'Save and test'. You can now start with the visualization. 
 
