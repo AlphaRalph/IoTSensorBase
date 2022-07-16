@@ -198,6 +198,8 @@ To visualize the measurement data, the open source platform Grafana is used.
 Download Grafana from the homepage. If necessary, see also the installation instructions. 
 
 Get Grafana [https://grafana.com/grafana/download?platform=windows]
+
+Make sure to download the installer and run it. 
 	
 Installation guides [https://www.tutorialandexample.com/grafana-tutorial
 
@@ -208,13 +210,15 @@ The Grafana documentation is available at [https://grafana.com/docs/]
 
 ### Plugins 
 Since there is no native support for AWS DynamoDB, a plugin is needed. It is recommended to use grafana-cli for this. 
-[https://github.com/TLV-PMOP/grafana-dynamodb-datasource]
 
-grafana-cli --pluginUrl https://github.com/TLV-PMOP/grafana-dynamodb-datasource/dynamodb-datasource_1.0.0.zip plugins install dynamodb-datasource 
+
+	grafana-cli --pluginUrl https://github.com/TLV-PMOP/grafana-dynamodb-datasource/dynamodb-datasource_1.0.0.zip plugins install dynamodb-datasource 
 
 If the use of grafana-cli does not work or is not wanted, the unzipped folder can be saved here '\GrafanaLabs\grafana-8.4.6\data\plugins'
 
+
 To download the pluigin, click on 'Code', then 'Download ZIP'
+[https://github.com/TLV-PMOP/grafana-dynamodb-datasource]
 
 ![IoT SensorBase][PlugIn1]
 
