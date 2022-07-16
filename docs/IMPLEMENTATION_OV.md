@@ -40,6 +40,11 @@ Find more information <a href="TRANSPORTATION_OV.md">here</a>.
 ## Cloudstorage
 
 Various measurement data received via MQTT must be stored in a database.
+The database is designed to accommodate all data regardless of sensor type. In this solution we store the data from a temperature/humidity sensor and a CO2 sensor. 
+
+In this solution, the data is not only written to a database, but the MQTT broker also sends the data to the CloudWatch at the same time to monitor all sent data at the beginning to avoid erroneous data in the cloud. Do not forget to disable sending all data to the CloudWatch (high cost).
+
+Translated with www.DeepL.com/Translator (free version)
 
 Find more information <a href="CLOUDSTORAGE_OV.md">here</a>.
 
