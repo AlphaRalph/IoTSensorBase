@@ -240,7 +240,7 @@ This leads to the configuration page, where you can search for the installed plu
 
 ![IoT SensorBase][PlugIn3]
 
-To add this datasource, under configuration page -> Data sources, klick the button 'Add Data source' and select the added plugin. 
+To add this datasource, under configuration page -> Data sources, click the button 'Add Data source' and select the added plugin. 
 This leads to the configuration page where the region and API keys must be added: 
 
 ![IoT SensorBase][PlugIn4]
@@ -250,7 +250,21 @@ You can find your personal private key and AccessKey ID in your AWS account.
 
 ![IoT SensorBase][PlugIn5]
 
-Klick on 'Save and test'. You can now start with the visualization. 
+Click on 'Save and test'. You can now start with the visualization. 
+
+To create a new dashboard, click on 'dashboards' and 'new dashboard'.
+
+![IoT SensorBase][PlugIn9]
+
+To display the values of the table, the fields must be filled in: 
+1. Select the dynamodb-datasource plugin
+2. Under 'Table name' the desired table can be selected. 
+3. The 'Time Field' contains the Sort Key - in our case 'SensorTimestamp'. 
+4. $ 5.  Under 'Key condition expression' the partition key is entered - here 'SensorName'. This is used to filter the data of the respective sensor. See the example in the picture.
+6. Value Fields contain the data - SensorData.
+7. Finally, the time period must be selected 
+
+![IoT SensorBase][PlugIn8]
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -270,6 +284,8 @@ Klick on 'Save and test'. You can now start with the visualization.
 [PlugIn5]: images/AWSFrankfurt.PNG
 [PlugIn6]: images/AllowUnsignedPlugins.PNG
 [PlugIn7]: images/srcfolder.PNG
+[PlugIn8]: images/TableFillIn.PNG
+[PlugIn9]: images/NewDashboard.PNG
 [CloudWatch]: images/CloudWatch.PNG
 [DynamoDB]: images/DynamoDB.PNG
 [Rule1]: images/Rule1.PNG
