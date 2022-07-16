@@ -9,9 +9,10 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-	    <li><a href="#HardwareSelection">Selection of suitable hardware</a></li>
+	    <li><a href="#Hardware Selection">Selection of suitable hardware</a></li>
         <li><a href="#Prerequisites">Prerequisites</a></li>
-		<li><a href="#InstallSensors">Install Sensors</a></li>
+        <li><a href="#Prerequisites">Prerequisites</a></li>
+		<li><a href="#Install Sensors">Install Sensors</a></li>
 		<li><a href="#MicroServices">Communication between MicroServices with Sensors</a></li>
 		<li><a href="#MongoDB">Setup MongoDB</a></li>
 		<li><a href="#DeviceGateway">Configuration of DeviceGateway</a></li>
@@ -25,31 +26,69 @@
 <!-- Getting Started Guide - Overview -->
 ## Getting Started Guide - Overview
 
-Getting started will walk you through the process to setup Sensors, a Devicegateway, IoT communication and Visualization.
+Getting started will walk you through the process to setup the Raspberry Pi, various sensors, a device gateway, IoT communication and the visualization.
 
 To get an idea about the architecture of this project have a look at the following picture.
 
 ![IoT SensorBase][Architecture]
 
 Python is used to connect to various sensors and gather data.<br />
-Sensordata is stored in a Mongo-DB.<br />
+Sensor data is stored in a Mongo-DB.<br />
 
-A DeviceGateway was created in C# to connect to various inbound-Channels.<br />
+A device gateway was created in C# to connect to various inbound channels.<br />
 In a first step only a MongoDbInboundChannes was created.<br />
-Data read by DaviceGateway are forwarded to an outbound-Channel.<br />
-In this case the outbound-Channel connects to AWS-Cloud.<br />
+Data read by device gateway are forwarded to an outbound channel.<br />
+In this case the outbound channel connects to AWS cloud.<br />
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## HardwareSelection
-
-Since a Raspberry was already provided by the FH-Wels, there was no need to look for an alternative here.
-
-The selection of sensors and LTE modul was done by Andrej Pervan
+## Hardware Selection
+Various devices and components are necessary for the elementary tasks. The complete list of components is as follows:
+* [Raspberry Pi 4 Model B](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/) 4GB
+  * Power supply with at least 15 watts output power
+  * USB-C cable for the connection between power supply and Raspberry Pi
+  * Micro SD card with at least 16GB storage capacity
+  * Network cable for the connection between computer and Raspberry Pi
+* Sensor for temperature and humidity [DHT22](https://www.reichelt.at/at/de/entwicklerboards-temperatur-feuchtigkeitssensor-dht22-debo-dht-22-p224218.html?PROVID=2807&gclid=CjwKCAjww8mWBhABEiwAl6-2ReQO3vYPiNHrR649THn-6HLbpCPvgqA7vQPz0gEjFMpD8jH_2U874xoC2z0QAvD_BwE)
+* Sensor for CO2 [MH-Z19C](https://www.reichelt.de/de/de/infrarot-co2-sensor-mh-z19c-pinleiste-rm-2-54-co2-mh-z19c-ph-p297320.html?r=1&gclid=CjwKCAjww8mWBhABEiwAl6-2RW_JbI0Y-NaGWL5Y9Eb1-wMTT53rWzYfBefaIPCa8fqqE1RBcy8AtxoCa7YQAvD_BwE)
+* Various Resistors
+* [T-Type breakout board set](https://www.reichelt.at/at/de/raspberry-pi-gpio-pinboard-t-typ-set-rpi-gpio-t-type-p282705.html?PROVID=2807&gclid=CjwKCAjww8mWBhABEiwAl6-2RdIoqnCXQQ9rfV1jxi7AKwFQ33lawaRIiw1MCyQWM_EOn3bcRJnlqRoCr1cQAvD_BwE)
+* Computer
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-### Prerequisites
+## Prerequisites
+Some preliminary work is necessary for the project in order to later integrate the individual components into the overall system in an executable manner.
+
+### Installing Raspberry OS
+Since it was decided in advance that a noSQL database or MongoDB will be used, it is necessary that Raspberry OS is installed in 64-bit format, otherwise an installation of MongoDB locally on the Raspberry Pi is not possible. The exact and official sequence of steps required for the installation is available and can be read [here](https://www.raspberrypi.com/documentation/computers/getting-started.html#sd-cards), so we will not go into it further in this post. After the installation, it is important that the SD card is still in the computer and that you create a file there called "SSH". Open the editor on Windows and save this empty file without file extension under the name "SSH" on the SD card. SSH (secure shell) is a network protocol, which allows the communication between computer and Raspberry Pi and thus enables a "headless" operation, where the Raspberry Pi does not need any additional displays or input devices. Finally, the SD card can be removed from the computer and inserted into the Raspberry Pi.
+
+### First Steps with Raspberry Pi
+For the first connection between laptop and Raspberry Pi, the two devices are connected via a network cable. Assuming you don't have any peripherals available, this is a simple and efficient way to work with the Raspberry Pi. Further, use a terminal program such as Windows Power Shell. Since you don't know the IP address of the newly installed Raspberry Pi, you can establish a connection with `pi@raspberry.local`. The credentials are the default values and are pi as username and raspberry as password. After that you are successfully connected to the Raspberry Pi.
+
+Commands in the Raspberry Pi are entered in the terminal as bash scripts. The first time you should update the Raspberry Pi, so that all packages and the operating system are updated. To do this use
+```sh
+sudo apt-get update
+sudo apt-get upgrade
+```
+
+### Network Settings
+To avoid the need for a network cable every time you connect, we assign the Raspberry Pi a static IP address, which you can use to address the Raspberry Pi wirelessly on your home network. If you execute the ipconfig command on the Windows computer in another terminal, the default gateway of the wireless LAN adapter is output, where the trailing sequence of numbers is interesting (in this case it was 192.168.0.1). To do this, execute the following command in the terminal:
+```sh
+sudo nano /etc/dhcpcd.conf
+```
+This changes on the one hand from the home directory to the directory `etc` and on the other hand opens an editor (in this case `nano`) with which you can edit the file `dhcpcd.conf`. `sudo` is a prefix for commands that are executed with root privileges. The following lines are added at the very bottom of the document:
+```sh
+interface wlan0
+static ip_address=192.168.0.101/24
+static routers=192.168.0.1
+static domain_name_servers=8.8.4.4 8.8.8.8
+static domain_search=
+```
+The first three numbers are the numbers of the standard gateway and the last number determines a single participant. The Raspberry Pi can now be addressed with the number 101 in the home network. The other numbers will not be discussed further here, since they are not relevant for the actual project. With `CTRL+O`, `Enter` and `CTRL+X` you exit the editor and end up in the terminal again. The Raspberry Pi has now been assigned a static IP address, which can now be used for communication. To activate the settings, you have to restart the Raspberry Pi, but the network cable must be removed immediately after the reboot, otherwise there will be complications with the selection of the standard gateway.
+```sh
+sudo reboot
+```
 
 MongoDB 5.0 under Raspberry Pi OS (64-bit) 
 [https://andyfelong.com/2021/08/mongodb-4-4-under-raspberry-pi-os-64-bit-raspbian64/]
