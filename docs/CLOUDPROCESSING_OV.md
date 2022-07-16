@@ -11,4 +11,3 @@ As a suitable plugin already existed, we just had to figure out how to connect t
 Accessing data is done by querying it. To do this, you need to define a partition key attribute and a single vlaue attribute. 
 See [https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Query.html] and [https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Query.html] for more information. 
 
-@Cloud-Team Please insert the result of your research here.
