@@ -15,9 +15,9 @@
 
 ## Acquisition
 
-To make the solution expandable microservices shall be used to acquire data from sensor.
+To make the solution expandable micro services shall be used to acquire data from sensor.
 Every sensor gets its own microservice.
-There are two tasks for these micro-services:
+There are two tasks for these micro services:
 * to acquire data from sensor
 * write data into database
 
