@@ -188,6 +188,7 @@ Last but not least we have to connect or DynamoDB to the MQTTClient. Click on "a
 ![IoT SensorBase][Rule2]
 
 At the end it should look like this:
+
 ![IoT SensorBase][Rule5]
 
 The aws Cloudservice is now set up!!
@@ -209,20 +210,22 @@ To do this, open the file properties by right-clicking the file in Windows Explo
 The Grafana documentation is available at [https://grafana.com/docs/]
 
 ### Plugins 
-Since there is no native support for AWS DynamoDB, a plugin is needed. It is recommended to use grafana-cli for this. 
-
-
-	grafana-cli --pluginUrl https://github.com/TLV-PMOP/grafana-dynamodb-datasource/dynamodb-datasource_1.0.0.zip plugins install dynamodb-datasource 
-
-If the use of grafana-cli does not work or is not wanted, the unzipped folder can be saved here '\GrafanaLabs\grafana-8.4.6\data\plugins'
-
+Since there is no native support for AWS DynamoDB, a plugin is needed. 
 
 To download the pluigin, click on 'Code', then 'Download ZIP'
 [https://github.com/TLV-PMOP/grafana-dynamodb-datasource]
 
 ![IoT SensorBase][PlugIn1]
 
-To use this plugin, the following change must be made in custom.ini (see also [https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#allow_loading_unsigned_plugins]): allow_loading_unsigned_plugins = dynamodb-datasource
+You have to move the folder 'src' from the main folder 'grafana-dynamodb-datasource-master' into the folder 'dist'. After that move the files 'module' and 'module.js.map' from the folder 'dist' into the folder 'src'.
+
+It should now look like this: 
+
+![IoT SensorBase][PlugIn7]
+
+To use this plugin, the following change must be made in custom.ini (see also [https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/#allow_loading_unsigned_plugins]): allow_loading_unsigned_plugins = tlv-co-ltd-dynamodb-datasource
+
+![IoT SensorBase][PlugIn6]
 
 The Grafana server must be restarted at this point. 
 Verify the plugin was installed.
@@ -263,6 +266,8 @@ Since the Frankfurt region was selected for the DynamoDB database, the AWS Regio
 [PlugIn3]: images/ConfigurationPlugin.png
 [PlugIn4]: images/DataSourcesPlugin.png
 [PlugIn5]: images/AWSFrankfurt.PNG
+[PlugIn6]: images/AllowUnsignedPlugins.PNG
+[PlugIn6]: images/srcfolder.PNG
 [CloudWatch]: images/CloudWatch.PNG
 [DynamoDB]: images/DynamoDB.PNG
 [Rule1]: images/Rule1.PNG
