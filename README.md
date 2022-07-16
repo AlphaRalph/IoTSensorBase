@@ -55,7 +55,7 @@ Fields of activity:
 * Database and SQL
 * Cloud services
 * Sensors
-* Communication (WIFI,LTE etc)
+* Communication (WiFi)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
