@@ -50,16 +50,7 @@ Find more information <a href="CLOUDSTORAGE_OV.md">here</a>.
 
 ## CloudProcessing
 
-In order to visualize the measured data, which is located in the AWS DynamoDB, Grafana was used in this project, which has to be installed first. 
-
-[https://grafana.com/grafana/download/8.4.6?platform=windows]
-
-Grafana does not have an interface to read the data from the database, so an additional plugin is needed. 
-
-[https://github.com/TLV-PMOP/grafana-dynamodb-datasource]
-
-For querying the data primary key values are required: a partition key attribute and a sort key attribute.
-The sort key attribute is the timestamp (SensorTimestamp), the primary key value is the sensor name (SensorName). 
+In order to visualize the measured data, which is located in the AWS DynamoDB, Grafana was used in this project. 
 
 Find more information <a href="CLOUDPROCESSING_OV.md">here</a>.
 
