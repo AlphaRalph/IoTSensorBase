@@ -37,6 +37,12 @@ You can see that in our Rule we dim the "DeviceID" as MQTT Topic and also we cre
 
 For example you want to send the GPS data from the IOT-Device and store the data in the DynamoDB. So you have to adapt the message you send. Add e.g. GPSData = 'here are data'.
 
+To store the data in the DynamoDB you have to select the GPSDATA in the rule. It would look like this: 
+
+```csharp
+SELECT GPSData, SensorData,SensorName,SensorType,SensorTimestamp,SensorUnit, cast(topic(2) AS String) as DeviceID, timestamp() as databaseTimestamp FROM 'device/+/data'
+```
+
 The JASON file would then look like this: 
 
 ```csharp
@@ -50,12 +56,6 @@ The JASON file would then look like this:
     "DeviceID": "10000000ffa294b5",
     "DatenbankTimestamp": 1658016826060
 }
-```
-
-To store the data in the DynamoDB you have to select the GPSDATA in the rule. It would look like this: 
-
-```csharp
-SELECT GPSData, SensorData,SensorName,SensorType,SensorTimestamp,SensorUnit, cast(topic(2) AS String) as DeviceID, timestamp() as databaseTimestamp FROM 'device/+/data'
 ```
 
 Once you selected all the data you need, you have to define what to do with the data. To do this aws IOT Core uses actions. In our case we use the action "Split message into multiple columns of a DynamoDB table (DynamoDBv2)". The DynamoDBv2 action allows you to write all or part of an MQTT message to a DynamoDB table. Each attribute in the payload is written to a separate column in the DynamoDB database. Messages processed by this action must be in the JSON format. But there are even other actions and you can write your own action with Lamdafunctions.<br /><br />
