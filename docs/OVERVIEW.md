@@ -295,81 +295,90 @@ First of all make sure that you have chosen the right region. In our case it is 
 
 ### Create a thing
 We start the process by creating a new Thing. Go to IOT Core. Click on "Manage" and then on "Things". To start the creation click on "Create a new Thing". 
-For the IOTSensorBase we create a "SingleThing".
+For the IOTSensorBase we create a "SingleThing".<br />
 
-![IoT SensorBase][CreateNewThing1]
+![IoT SensorBase][CreateNewThing1]<br />
 
-Type in a name of the "Thing" and click on "next". We don't need to set up the additional settings and don't need an device shadow. 
+Type in a name of the "Thing" and click on "next". We don't need to set up the additional settings and don't need an device shadow. <br />
 
-![IoT SensorBase][CreateNewThing2]
+![IoT SensorBase][CreateNewThing2]<br />
 
-To get the right certificates please click "Auto-generate a new certificte (recommended)"
+To get the right certificates please click "Auto-generate a new certificte (recommended)".<br />
 Then create a new policy like the following sample and attach it to the "Thing". This policy allows each device to do everything. If you want restrictions, specify this in the policy. 
 
 ![IoT SensorBase][policy1]
 
 Then click on "create thing".<br />
-IMPORTANT: A window will appear instructing you to download the certificates. Download all the certificates according to the image and click on "Done". The "Thing" is sucessfully created!
+IMPORTANT: <br /> A window will appear instructing you to download the certificates. Download all the certificates according to the image and click on "Done". The "Thing" is sucessfully created!
 
 ![IoT SensorBase][Zertifikate]
 
 To enable the connection with the outputcannel from the gateway you need to take the certificates and perform the following steps: 
 
-Device certificate - This file usually ends with ".pem.crt". When you download this it will save as .txt file extension in windows. Save it in your ninary directory as 'bin\certificate.cert.pem' and make sure that it is of file type '.pem', not 'txt' or '.crt'
+Device certificate<br />
+This file usually ends with ".pem.crt". When you download this it will save as .txt file extension in windows. Save it in your ninary directory as 'bin\certificate.cert.pem' and make sure that it is of file type '.pem', not 'txt' or '.crt'
 
-Device public key - This file usually ends with ".pem" and is of file type ".key". Save this file as 'bin\certificate.public.key'.
+Device public key<br />
+This file usually ends with ".pem" and is of file type ".key". Save this file as 'bin\certificate.public.key'.
 
-Device private key - This file usually ends with ".pem" and is of file type ".key". Save this file as 'bin\certificate.private.key'. Make sure that this file is referred with suffix ".key" in the code while making MQTT connection to AWS IoT.
+Device private key<br />
+This file usually ends with ".pem" and is of file type ".key". Save this file as 'bin\certificate.private.key'. Make sure that this file is referred with suffix ".key" in the code while making MQTT connection to AWS IoT.
 
-Root certificate - Save this file to 'bin\AmazonRootCA1.crt'
+Root certificate<br />
+Save this file to 'bin\AmazonRootCA1.crt'
 
-Converting Device Certificate from .pem to .pfx
+Converting Device Certificate from .pem to .pfx<br />
 In order to establish an MQTT connection with the AWS IoT platform, the root CA certificate, the private key of the thing, and the certificate of the thing/device are needed. The .NET cryptographic APIs can understand root CA (.crt), device private key (.key) out-of-the-box. It expects the device certificate to be in the .pfx format, not the .pem format. Hence we need to convert the device certificate from .pem to .pfx.
 
 The easiest way to do this is via an online converter. Like: https://rvssl.com/ssl-converter/ 
 
-If you have followed all the steps correctly and the certificates are correctly placed in the binaries folder, the DeviceGateway should be able to connect to AWS IOT Core.x
+If you have followed all the steps correctly and the certificates are correctly placed in the binaries folder, the DeviceGateway should be able to connect to AWS IOT Core.
 
 ### Create Trace Database
-Next, we create a log database to track and review incoming messages before loading them into the database. This prevents unnecessary or erroneous data in the database. 
-To do this, search "Cloud Watch" - Click on "Log groups" and then click "new log group". Click on "create"
+Next, we create a log database to track and review incoming messages before loading them into the database. <br /> This prevents unnecessary or erroneous data in the database. 
+To do this, search "Cloud Watch" - Click on "Log groups" and then click "new log group". Click on "create" <br />
 
-![IoT SensorBase][CloudWatch]
+![IoT SensorBase][CloudWatch]<br />
 
-Now the LogDatebase is created. You can repeat this step to create an Log for errors. Name it "IOTError"
+Now the LogDatebase is created. You can repeat this step to create an Log for errors. Name it "IOTError"<br />
 
 ### Create DynamoDB
 
 Now we will create the actual database in which the data will finally be stored. To do this, search for "DynamoDB". Click on "Tabels" and then on "create Table".
-Assign a name for the table. It is important that you enter in the PartationKey field the name "SensorName" with the unit "string" and the SortKey the name "SensorTimestamp" with unit "number". Make sure that there are no spelling mistakes. Also upper and lower case is important. 
+Assign a name for the table. It is important that you enter in the PartationKey field the name "SensorName" with the unit "string" and the SortKey the name "SensorTimestamp" with unit "number". Make sure that there are no spelling mistakes. Also upper and lower case is important. <br />
 
-![IoT SensorBase][DynamoDB]
+![IoT SensorBase][DynamoDB]<br />
 
-Then click on "create table". Now the database is ready to be filled. 
+Then click on "create table". Now the database is ready to be filled. <br />
 
 ### Connect IOT CORE / Cloud Watch / DynamoDB
 The last step in setting up the aws Cloud is to link the individual services together. This is done via the MQTT Broker (IOT Core). To do this, search for "IOT Core".  Click on "Act" and then on "Rules". To create a rule click on "create". 
 
 At the beginning, you assign a name for the rule. The name does not matter. Next, click on "edit" at Rule query statement and add the following code:<br />
+
+To store the data in the DynamoDB you have to select the GPSDATA in the rule. It would look like this: 
+
+```csharp
 SELECT SensorData,SensorName,SensorType,SensorTimestamp,SensorUnit, cast(topic(2) AS String) as DeviceID, timestamp() as DatenbankTimestamp FROM 'device/+/data'
+```
+<br />
+![IoT SensorBase][Rule1]<br />
 
-![IoT SensorBase][Rule1]
+Next, select "add new Action" from "Actions". Click on "Send message data to CloudWatch logs" and select your created CloudWatch for logging.<br />
+![IoT SensorBase][Rule3]<br />
 
-Next, select "add new Action" from "Actions". Click on "Send message data to CloudWatch logs" and select your created CloudWatch for logging.
-![IoT SensorBase][Rule3]
-
-For logging errors, you can either use Cloudwatch from before, or if you have created a standalone Cloudwatch, you can use this.
-![IoT SensorBase][Rule4]
+For logging errors, you can either use Cloudwatch from before, or if you have created a standalone Cloudwatch, you can use this.<br />
+![IoT SensorBase][Rule4]<br />
 
 Now it would be a great time for testing. Send Data from your client and check in the CloudWatch if Data arrive. <br /><br />
-Last but not least we have to connect or DynamoDB to the MQTTClient. Click on "add Action" and then on "Split message into multiple columns of a DynamoDB table (DynamoDBv2)" choose the DynamoDB we created in the list. 
-![IoT SensorBase][Rule2]
+Last but not least we have to connect or DynamoDB to the MQTTClient. Click on "add Action" and then on "Split message into multiple columns of a DynamoDB table (DynamoDBv2)" choose the DynamoDB we created in the list. <br />
+![IoT SensorBase][Rule2]<br />
 
-At the end it should look like this:
+At the end it should look like this:<br />
 
-![IoT SensorBase][Rule5]
+![IoT SensorBase][Rule5]<br />
 
-The aws Cloudservice is now set up!!
+The aws Cloudservice is now set up!!<br />
 
 ## Visualization 
 
