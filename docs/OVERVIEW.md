@@ -291,25 +291,25 @@ Once both connections are established the device gateway will start to transfer 
 
 ## CloudServices
 First of all make sure that you have chosen the right region. In our case it is eu-central.<br />
-![IoT SensorBase][PlugIn5]
+![IoT SensorBase][PlugIn5]<br />
 
 ### Create a thing
 We start the process by creating a new Thing. Go to IOT Core. Click on "Manage" and then on "Things". To start the creation click on "Create a new Thing". 
-For the IOTSensorBase we create a "SingleThing".<br />
+For the IOTSensorBase we create a "Single Thing".<br />
 
 ![IoT SensorBase][CreateNewThing1]<br />
 
-Type in a name of the "Thing" and click on "next". We don't need to set up the additional settings and don't need an device shadow. <br />
+Type in a name of the "Thing" and click on "Next". We don't need to set up the additional settings and don't need an device shadow. <br />
 
 ![IoT SensorBase][CreateNewThing2]<br />
 
 To get the right certificates please click "Auto-generate a new certificte (recommended)".<br />
 Then create a new policy like the following sample and attach it to the "Thing". This policy allows each device to do everything. If you want restrictions, specify this in the policy. 
 
-![IoT SensorBase][policy1]
+![IoT SensorBase][policy1]<br />
 
 Then click on "create thing".<br />
-IMPORTANT: <br /> A window will appear instructing you to download the certificates. Download all the certificates according to the image and click on "Done". The "Thing" is sucessfully created!
+A window will appear instructing you to download the certificates. Download all the certificates according to the image and click on "Done". The "Thing" is sucessfully created!
 
 ![IoT SensorBase][Zertifikate]
 
@@ -356,12 +356,10 @@ The last step in setting up the aws Cloud is to link the individual services tog
 
 At the beginning, you assign a name for the rule. The name does not matter. Next, click on "edit" at Rule query statement and add the following code:<br />
 
-To store the data in the DynamoDB you have to select the GPSDATA in the rule. It would look like this: 
-
 ```csharp
 SELECT SensorData,SensorName,SensorType,SensorTimestamp,SensorUnit, cast(topic(2) AS String) as DeviceID, timestamp() as DatenbankTimestamp FROM 'device/+/data'
 ```
-<br />
+
 ![IoT SensorBase][Rule1]<br />
 
 Next, select "add new Action" from "Actions". Click on "Send message data to CloudWatch logs" and select your created CloudWatch for logging.<br />
