@@ -193,4 +193,4 @@ With `CTRL+O`, `Enter` and `CTRL+X` you save and exit the editor and end up in t
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[LayoutGesamt]: images/LayoutGesamt.png
+[LayoutGesamt]: images/LayoutGesamt.jpg
