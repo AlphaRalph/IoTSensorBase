@@ -362,19 +362,22 @@ SELECT SensorData,SensorName,SensorType,SensorTimestamp,SensorUnit, cast(topic(2
 
 ![IoT SensorBase][Rule1]<br />
 
-Next, select "add new Action" from "Actions". Click on "Send message data to CloudWatch logs" and select your created CloudWatch for logging.<br />
+Next, select "add new Action" from "Actions". Click on "Send message data to CloudWatch logs" and select your created CloudWatch for logging.<br /><br />
+
 ![IoT SensorBase][Rule3]<br />
 
-For logging errors, you can either use Cloudwatch from before, or if you have created a standalone Cloudwatch, you can use this.<br />
-![IoT SensorBase][Rule4]<br />
+For logging errors, you can either use Cloudwatch from before, or if you have created a standalone Cloudwatch, you can use this.<br /><br />
+
+![IoT SensorBase][Rule4]<br /><br />
 
 Now it would be a great time for testing. Send Data from your client and check in the CloudWatch if Data arrive. <br /><br />
-Last but not least we have to connect or DynamoDB to the MQTTClient. Click on "add Action" and then on "Split message into multiple columns of a DynamoDB table (DynamoDBv2)" choose the DynamoDB you created before. <br />
-![IoT SensorBase][Rule2]<br />
+Last but not least we have to connect or DynamoDB to the MQTTClient. Click on "add Action" and then on "Split message into multiple columns of a DynamoDB table (DynamoDBv2)" choose the DynamoDB you created before. <br /><br />
+
+![IoT SensorBase][Rule2]<br /><br />
 
 At the end it should look like this:<br />
 
-![IoT SensorBase][Rule5]<br />
+![IoT SensorBase][Rule5]<br /><br />
 
 The aws Cloudservice is now set up!!<br />
 
