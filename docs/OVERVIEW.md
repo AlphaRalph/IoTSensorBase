@@ -290,7 +290,7 @@ Once both connections are established the device gateway will start to transfer 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## CloudServices
-First of all make sure that you have chosen the right region. In our case it is eu-central.<br />
+First of all make sure that you have choose the right region. In our case it is `eu-central.`<br />
 ![IoT SensorBase][PlugIn5]<br />
 
 ### Create a thing
@@ -369,7 +369,7 @@ For logging errors, you can either use Cloudwatch from before, or if you have cr
 ![IoT SensorBase][Rule4]<br />
 
 Now it would be a great time for testing. Send Data from your client and check in the CloudWatch if Data arrive. <br /><br />
-Last but not least we have to connect or DynamoDB to the MQTTClient. Click on "add Action" and then on "Split message into multiple columns of a DynamoDB table (DynamoDBv2)" choose the DynamoDB we created in the list. <br />
+Last but not least we have to connect or DynamoDB to the MQTTClient. Click on "add Action" and then on "Split message into multiple columns of a DynamoDB table (DynamoDBv2)" choose the DynamoDB you created before. <br />
 ![IoT SensorBase][Rule2]<br />
 
 At the end it should look like this:<br />
