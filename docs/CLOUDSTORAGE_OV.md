@@ -21,7 +21,7 @@ Our rule is:
 SELECT SensorData,SensorName,SensorType,SensorTimestamp,SensorUnit, cast(topic(2) AS String) as DeviceID, timestamp() as databaseTimestamp FROM 'device/+/data'
 ```
 
-Let's consider the JASON file sent over the MQTT protocol from the gateway. 
+Let's consider the JASON file we create with the rule. 
 ```csharp
 {
     "SensorData": 1557,
