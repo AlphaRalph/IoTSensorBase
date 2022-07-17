@@ -246,7 +246,7 @@ sudo python -m pip install pymongo
 
 ## Device Gateway
 
-You will find a config.xml in your binaries folder.<br />
+You will find a `config.xml` in your binaries folder.<br />
 
 Device gateway needs at least one inbound and one outbound channel to run.<br />
 To read data from MongoDB and send to AWS cloud the configuration could look like this:<br />
@@ -316,16 +316,16 @@ A window will appear instructing you to download the certificates. Download all 
 To enable the connection with the outputcannel from the gateway you need to take the certificates and perform the following steps: 
 
 Device certificate<br />
-This file usually ends with ".pem.crt". When you download this it will save as .txt file extension in windows. Save it in your ninary directory as 'bin\certificate.cert.pem' and make sure that it is of file type '.pem', not 'txt' or '.crt'
+This file usually ends with ".pem.crt". When you download this it will save as .txt file extension in windows. Save it in your ninary directory as `bin\certificate.cert.pem` and make sure that it is of file type '.pem', not 'txt' or '.crt'
 
 Device public key<br />
-This file usually ends with ".pem" and is of file type ".key". Save this file as 'bin\certificate.public.key'.
+This file usually ends with ".pem" and is of file type ".key". Save this file as `bin\certificate.public.key`.
 
 Device private key<br />
-This file usually ends with ".pem" and is of file type ".key". Save this file as 'bin\certificate.private.key'. Make sure that this file is referred with suffix ".key" in the code while making MQTT connection to AWS IoT.
+This file usually ends with ".pem" and is of file type ".key". Save this file as `bin\certificate.private.key`. Make sure that this file is referred with suffix ".key" in the code while making MQTT connection to AWS IoT.
 
 Root certificate<br />
-Save this file to 'bin\AmazonRootCA1.crt'
+Save this file to `bin\AmazonRootCA1.crt`
 
 Converting Device Certificate from .pem to .pfx<br />
 In order to establish an MQTT connection with the AWS IoT platform, the root CA certificate, the private key of the thing, and the certificate of the thing/device are needed. The .NET cryptographic APIs can understand root CA (.crt), device private key (.key) out-of-the-box. It expects the device certificate to be in the .pfx format, not the .pem format. Hence we need to convert the device certificate from .pem to .pfx.
