@@ -9,7 +9,7 @@
 <li><a href="#Hardware Selection">Hardware Selection</a></li>
 <li><a href="#Prerequisites">Prerequisites</a></li>
 <li><a href="#Install Sensors">Install Sensors</a></li>
-<li><a href="#Micro Services">Micro Services</a></li>
+<li><a href="#Micro Services General">Micro Services General</a></li>
 <li><a href="#MongoDB">MongoDB</a></li>
 <li><a href="#Device Gateway">Device Gateway</a></li>
 <li><a href="#Cloud Services">Cloud Services</a></li>
@@ -161,73 +161,68 @@ All necessary software is thus installed for the sensor.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## Micro Services
+## Micro Services General
 For the communication between Raspberry Pi and the respective sensors, small own programs were developed, which communicate independently with the sensors and thus record data. The programs are primarily used to test the functionality of the individual sensors. Nevertheless, individual components of the programs are subsequently used for the actual project. The advantage of micro services is that, regardless of the number of sensors, only small building blocks need to be generated again and again, which are then implemented back into the overall system.
 
 ### Temperature and Humidity Sensor
 To check the functionality, a new program must first be created. The editor `nano` is used for this and the file extension `.py` indicates that it is a program in Python.
 ```sh
-sudo nano dht_example.py
+sudo nano ms_dht22.py
 ```
 ```python
 import time
-import board
-import adafruit_dht
- 
-# Initial the dht device, with data pin connected to:
-# dhtDevice = adafruit_dht.DHT22(board.D4)
- 
-# you can pass DHT22 use_pulseio=False if you wouldn't like to use pulseio.
-# This may be necessary on a Linux single board computer like the Raspberry Pi,
-# but it will not work in CircuitPython.
-dhtDevice = adafruit_dht.DHT22(board.D4, use_pulseio=False)
- 
+import board # library for pins on board
+import adafruit_dht # library for temperature and humidity sensor
+
+dhtDevice = adafruit_dht.DHT22(board.D17, use_pulseio=False) # read data on pin 17
 while True:
     try:
-        # Print the values to the serial port
-        temperature_c = dhtDevice.temperature
-        humidity = dhtDevice.humidity
-        print(
-            "Temp: {:.1f} C    Humidity: {}% ".format(
-                temperature_c, humidity
-            )
-        )
- 
+        dataTemp = dhtDevice.temperature # read temperature
+        dataHum = dhtDevice.humidity # read humidity
+        print(dataTemp, dataHum)
     except RuntimeError as error:
         # Errors happen fairly often, DHT's are hard to read, just keep going
         print(error.args[0])
-        time.sleep(2.0) # Maximum reading time DHT22
+        time.sleep(5.0)
         continue
     except Exception as error:
         dhtDevice.exit()
         raise error
- 
-    time.sleep(2.0) # Maximum reading time DHT22
+    time.sleep(5.0) # maximum time for DHT22 = 2.0
 ```
 With `CTRL+O`, `Enter` and `CTRL+X` you save and exit the editor and end up in the terminal again. To start the program, the following is executed in the terminal:
 ```sh
-sudo python dht_example.py
+sudo python ms_dht22.py
 ```
 The values for temperature and humidity are now displayed in the terminal and read out cyclically. If you want to end the current process, you can do this with the key combination `CTRL+C`.
 
 ### CO2 Sensor
 To check the functionality, a new program must first be created. The editor `nano` is used for this and the file extension `.py` indicates that it is a program in Python.
 ```sh
-sudo nano mhz19_example.py
+sudo nano ms_mhz19.py
 ```
 ```python
 import time
-import mh_z19
+import json # library for json strings
+import mh_z19 # library for CO2 sensor
 
 while True:
-  print(mh_z19.readall())
-  time.sleep(2.0)
+    try:  
+        dataCO2 = json.dumps(mh_z19.read()).split() # sensor returns a dict format, converting to JSON and split it into a list
+        dataCO2 = dataCO2[1] # use first element in list
+        dataCO2 = float(dataCO2[:-1]) # delete last letter in string, convert it to float
+        print(dataCO2)
+    except:
+        print(error.args[0])
+        time.sleep(5.0)
+        continue
+    time.sleep(5.0)
 ```
 With `CTRL+O`, `Enter` and `CTRL+X` you save and exit the editor and end up in the terminal again. To start the program, the following is executed in the terminal:
 ```sh
-sudo python mhz19_example.py
+sudo python ms_mhz19.py
 ```
-The values for CO2 concentration and other stuff are now displayed in the terminal and read out cyclically. If you want to end the current process, you can do this with the key combination `CTRL+C`.
+The values for CO2 concentration are now displayed in the terminal and read out cyclically. If you want to end the current process, you can do this with the key combination `CTRL+C`.
 
 The value of the CO2 content can alternatively be read out via the ready-made Python program, which comes from the manufacturer. Thereby one uses
 ```sh
@@ -239,6 +234,13 @@ The rest of the procedure is identical to the other two measurements.
 
 ## MongoDB
 The choice between SQL or noSQL database was made in favor of the noSQL database, because the individual data have no relevant connection to each other and thus the core idea of an SQL database (dependency between individual data) is not fulfilled. For the installation of MongoDB, we used Andy Felong's [instructions](https://andyfelong.com/2021/08/mongodb-4-4-under-raspberry-pi-os-64-bit-raspbian64/), which are very detailed and accurate. Therefore, the topic will not be discussed further here.
+
+In addition to the installation on the Raspberry Pi, it is recommended that you download and install [MongoDBCompass](https://www.mongodb.com/products/compass) on the Windows computer, since it is a graphical management program and thus the handling with the database becomes easier. After installation, select the advanced connection options when the program is open. Then select Proxy/SSH and fill in the remaining fields. The hostname is the static IP address, the port is 22, the username is pi and the password is raspberry.
+
+Lastly, `pymongo` needs to be installed, as this package is needed for the connection between Python and MongoDB.
+```sh
+sudo python -m pip install pymongo
+```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

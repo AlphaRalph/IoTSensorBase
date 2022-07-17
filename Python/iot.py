@@ -5,7 +5,7 @@ import json # library for json strings
 import time 
 from pymongo import MongoClient # library for MongoDB
 
-dhtDevice = adafruit_dht.DHT22(board.D17, use_pulseio=False) # read data on pin 17
+dhtDevice = adafruit_dht.DHT22(board.D4, use_pulseio=False) # read data on pin 4
 
 timestamp = "SensorTimestamp"
 name = "SensorName"
@@ -32,7 +32,7 @@ while True:
         dataCO2 = float(dataCO2[:-1]) # delete last letter in string, convert it to float
 
     except RuntimeError as error:
-        # Errors happen fairly often, DHT's are hard to read, just keep going
+        # errors happen fairly often, DHT's are hard to read, just keep going
         print(error.args[0])
         time.sleep(5.0)
         continue
@@ -43,7 +43,7 @@ while True:
     time.sleep(5.0) # maximum time for DHT22 = 2.0
 
     list = [
-        {
+        {   #data format for temperature
             timestamp: time.time(), 
             name: sensorTemp,
             typ: typeTemp,
@@ -51,7 +51,7 @@ while True:
             SensorUnit: "C", 
             Status: 1
         },
-        {
+        {   # data format for humidity
             timestamp: time.time(), 
             name: sensorHum,
             typ: typeHum,
@@ -59,7 +59,7 @@ while True:
             SensorUnit: "%", 
             Status: 1
         },
-        {
+        {   # data format for CO2 concentration
             timestamp: time.time(),
             name: sensorCO2,
             typ: typeCO2,
@@ -70,4 +70,3 @@ while True:
     ] # list format for MongoDB
 
     collection.insert_many(list) # send data to MongoDB
-
