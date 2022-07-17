@@ -336,23 +336,23 @@ If you have followed all the steps correctly and the certificates are correctly 
 
 ### Create Trace Database
 Next, we create a log database to track and review incoming messages before loading them into the database. <br /> This prevents unnecessary or erroneous data in the database. 
-To do this, search "Cloud Watch" - Click on "Log groups" and then click "new log group". Click on "create" <br />
+To do this, search `Cloud Watch` - Click on "Log groups" and then click "new log group". Click on "create" <br />
 
 ![IoT SensorBase][CloudWatch]<br />
 
-Now the LogDatebase is created. You can repeat this step to create an Log only for errors. Name it "ErrorIOTSensorBase"<br />
+Now the LogDatebase is created. You can repeat this step to create an Log only for errors. Name it `ErrorIOTSensorBase`<br />
 
 ### Create DynamoDB
 
-Now we will create the actual database in which the data will finally be stored. To do this, search for "DynamoDB". Click on "Tabels" and then on "create Table".
-Assign a name for the table. It is important that you enter in the PartationKey field the name "SensorName" with the unit "string" and the SortKey the name "SensorTimestamp" with unit "number". Make sure that there are no spelling mistakes. Also upper and lower case is important. <br />
+Now we will create the actual database in which the data will finally be stored. To do this, search for `DynamoDB`. Click on "Tabels" and then on "create Table".
+Assign a name for the table. It is important that you enter in the PartationKey field the name `SensorName` with the unit `string` and the SortKey the name `SensorTimestamp` with unit `number`. Make sure that there are no spelling mistakes. Also upper and lower case is important. <br />
 
 ![IoT SensorBase][DynamoDB]<br />
 
 Then click on "create table". Now the database is ready to be filled. <br />
 
 ### Connect IOT CORE / Cloud Watch / DynamoDB
-The last step in setting up the aws Cloud is to link the individual services together. This is done via the MQTT Broker (IOT Core). To do this, search for "IOT Core".  Click on "Act" and then on "Rules". To create a rule click on "create". 
+The last step in setting up the aws Cloud is to link the individual services together. This is done via the MQTT Broker (IOT Core). To do this, search for `IOT Core`.  Click on "Act" and then on "Rules". To create a rule click on "create". 
 
 At the beginning, you assign a name for the rule. The name does not matter. Next, click on "edit" at Rule query statement and add the following code:<br />
 
