@@ -340,7 +340,7 @@ To do this, search "Cloud Watch" - Click on "Log groups" and then click "new log
 
 ![IoT SensorBase][CloudWatch]<br />
 
-Now the LogDatebase is created. You can repeat this step to create an Log for errors. Name it "IOTError"<br />
+Now the LogDatebase is created. You can repeat this step to create an Log only for errors. Name it "ErrorIOTSensorBase"<br />
 
 ### Create DynamoDB
 
